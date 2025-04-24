@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Поезда</title>
+  <link rel="stylesheet" href="css/trips.css">
+</head>
+<body>
+  <div class="top-bar">
+    <button class="icon-button">
+        <img src="img/return.png" alt="Icon" class="icon"> <!-- Ваш файл с иконкой -->
+    </button>
+    <div class="title">Поезда</div>
+  </div>
+  <div class="date-filter-wrapper">
+    <p class="today-date">20 фев</p>
+    <div class="coach-filter">
+      <div class="custom-select-wrapper">
+        <div class="custom-select">
+          <div class="custom-select-trigger">Тип вагона</div>
+          <div class="custom-options">
+            <div class="custom-option" data-value="platzkart">Плацкарт</div>
+            <div class="custom-option" data-value="kupe">Купе</div>
+            <div class="custom-option" data-value="sv">СВ</div>
+            <div class="custom-option" data-value="sitting">Сидячий</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="availability-panel">
+      <p>Есть свободные места</p>
+      <img src="img/Done1.png" alt="Icon" class="availability-icon" />
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-inner">
+      <div class="panel-content">
+        <div class="panel-overlay">
+          <p class="overlay-text">Самара</p>
+        </div>
+        <p class="panel-label">Откуда</p>
+      </div>
+      <!-- Новый блок справа -->
+      <div class="panel-content">
+        <div class="panel-overlay">
+          <p class="overlay-text">Куда</p>
+        </div>
+        <p class="panel-label">Куда</p>
+      </div>
+      <!-- 🔹 Третий, уменьшенный блок -->
+      <div class="panel-content small">
+        <div class="panel-overlay">
+          <p class="overlay-text">Дата туда</p>
+          <img src="img/calendar.png" alt="Календарь" class="calendar-icon" />
+        </div>
+        <p class="panel-label">Туда</p>
+      </div>
+      <div class="panel-content small">
+        <div class="panel-overlay">
+          <p class="overlay-text">Дата обратно</p>
+          <img src="img/calendar.png" alt="Календарь" class="calendar-icon" />
+        </div>
+        <p class="panel-label">Обратно</p>
+      </div>
+      <div class="panel-button">Подобрать</div>
+    </div>
+  </div>
+  <div class="ticket-area">
+    <div class="ticket-panel">
+      <div class="train-name">Поезд 050</div>
+      <div class="price-area">
+        <div class="fare-line">
+          <span class="fare-type">Купе</span>
+          <span class="fare-price">от 2534 ₽</span>
+        </div>
+        <div class="fare-line">
+          <span class="fare-type">СВ</span>
+          <span class="fare-price">от 21134 ₽</span>
+        </div>
+        <div class="fare-line">
+          <span class="fare-type">Сидячий</span>
+          <span class="fare-price">от 2534 ₽</span>
+        </div>
+        <div class="fare-line">
+          <span class="fare-type">Плацкарт</span>
+          <span class="fare-price">от 2534 ₽</span>
+        </div>
+      </div>
+      <button class="select-button">Выбрать места</button>
+      <div class="route-area">
+        <div class="departure-time-area">
+          <p class="departure-date">20 фев</p>
+          <p class="departure-time">18:05</p>
+        </div>
+        <div class="arrival-time-area">
+          <p class="arrival-date">21 фев</p>
+          <div class="arrival-time-group">
+            <p class="arrival-time">07:27</p>
+            <p class="arrival-time-label">(Местн)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ticket-panel">
+      <div class="train-name">Поезд 050</div>
+      <div class="price-area">
+        <div class="fare-line">
+          <span class="fare-type">Купе</span>
+          <span class="fare-price">от 2534 ₽</span>
+        </div>
+        <div class="fare-line">
+          <span class="fare-type">СВ</span>
+          <span class="fare-price">от 21134 ₽</span>
+        </div>
+        <div class="fare-line">
+          <span class="fare-type">Сидячий</span>
+          <span class="fare-price">от 2534 ₽</span>
+        </div>
+        <div class="fare-line">
+          <span class="fare-type">Плацкарт</span>
+          <span class="fare-price">от 2534 ₽</span>
+        </div>
+      </div>
+      <button class="select-button">Выбрать места</button>
+      <div class="route-area">
+        <div class="departure-time-area">
+          <p class="departure-date">20 фев</p>
+          <p class="departure-time">18:05</p>
+        </div>
+        <div class="arrival-time-area">
+          <p class="arrival-date">21 фев</p>
+          <div class="arrival-time-group">
+            <p class="arrival-time">07:27</p>
+            <p class="arrival-time-label">(Местн)</p>
+          </div>
+        </div>
+      </div>
+  </div>
+    <script src="js/trips.js"></script>
+</body>
+</html>
