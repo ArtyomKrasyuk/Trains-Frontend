@@ -2,10 +2,10 @@ const availabilityPanel = document.querySelector('.availability-panel');
 const availabilityIcon = document.querySelector('.availability-icon');
 
 function toggleIcon() {
-  if (availabilityIcon.src.includes('images/Done1.png')) {
-    availabilityIcon.src = 'images/Unavailable1.png';
+  if (availabilityIcon.src.includes('img/Done1.png')) {
+    availabilityIcon.src = 'img/Unavailable1.png';
   } else {
-    availabilityIcon.src = 'images/Done1.png';
+    availabilityIcon.src = 'img/Done1.png';
   }
 }
 
