@@ -49,6 +49,23 @@ if(numberOfSeatsSV % 2 == 0){
     }
 }
 
+
+
+// response body
+let numberOfSeatsSeatCarriage = 96;
+let block1 = 3;
+let block2 = 3;
+let str4 = `<p class="carriage__number">12 вагон</p>`+
+    `<p class="carriage__seats">${numberOfSeatsSeatCarriage} мест</p>`+
+    `<p class="carriage__price">4234₽</p>`;
+let div4= document.getElementById('seat_carriage_info');
+div4.insertAdjacentHTML('beforeend', str4);
+if(numberOfSeatsSeatCarriage % (block1 + block2) == 0){
+    for(let i = 1; i < numberOfSeatsSeatCarriage; i+=(block1 + block2)){
+        fillSeatCarriage(i, block1, block2);
+    }
+}
+
 function fillCoupe(number, type, last){
     let add = '';
     if(last) add = 'last_coupe';
@@ -151,4 +168,27 @@ function fillSV(number, type, last){
             '</div>';
     let div = document.getElementById('sv_seats');
     div.insertAdjacentHTML('beforeend', str);
+}
+
+function fillSeatCarriage(number, block1, block2){
+    str1 = '<div class="seat_block">';
+    for(let i = 0; i < block1; i++){
+        str1 += '<div class="coupe__seat" data-tooltip="2134₽">'+
+                    `<p class="seat__number">${number+i}</p>`+
+               ' </div>';
+    }
+    str1 += '</div>'
+
+    str2 = '<div class="seat_block bottom_block">';
+    for(let i = 0; i < block2; i++){
+        str2 += '<div class="coupe__seat" data-tooltip="2134₽">'+
+                    `<p class="seat__number">${number+block1+i}</p>`+
+               ' </div>';
+    }
+    str2 += '</div>';
+
+    let div1 = document.getElementById('seat_carriage_seats');
+    div1.insertAdjacentHTML('beforeend', str1);
+    let div2 = document.getElementById('seat_carriage_bottom_seats');
+    div2.insertAdjacentHTML('beforeend', str2);
 }

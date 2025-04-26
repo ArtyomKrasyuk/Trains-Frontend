@@ -155,6 +155,13 @@ main{
     margin-bottom: 61px;
 }
 
+.seat_carriage__schema__top{
+    display: flex;
+    width: 100%;
+    align-items: start;
+    height: 125px;
+}
+
 .schema__wc_left{
     height: 15px;
     width: 26px;
@@ -204,12 +211,23 @@ main{
     justify-content: space-between;
 }
 
+.seat_block{
+    width: 49px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3px 8px 0px 8px;
+}
+
 .coupe__seat{
     height: 33px;
     width: 33px;
     border: 1px solid #5AC3FF;
     border-radius: 5px;
     margin-bottom: 6px;
+}
+
+#seat_carriage_seats .coupe__seat{
+    margin-bottom: 3px;
 }
 
 .coupe__seat:hover{
@@ -276,6 +294,17 @@ main{
     color: #5AC3FF;
 }
 
+.seat__number{
+    height: 33px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #5AC3FF;
+}
+
 .seat__img_bottom{
     width: 10px;
     height: 2px;
@@ -328,6 +357,32 @@ main{
     justify-content: center;
     margin-left: 46px;
     margin-right: 18px;
+}
+
+.seat_carriage_top_row{
+    height: 111px;
+    align-items: start;
+}
+
+.seat_carriage_bottom_row{
+    max-width: 844px;
+    height: 115x;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    margin-left: 46px;
+    margin-right: 18px;
+    padding-bottom: 3px;
+}
+
+.bottom_block{
+    align-items: end;
+}
+
+.bottom_block .coupe__seat{
+    margin-bottom: 0;
+    margin-top: 3px;
 }
 
 .coupe_bottom{
