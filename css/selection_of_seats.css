@@ -7,6 +7,10 @@
     font-family: "Roboto", sans-serif;
 }
 
+.hidden{
+    display: none;
+}
+
 header{
     padding: 30px 0px;
 }
@@ -46,6 +50,7 @@ main{
     max-width: 1394px;
     width: 100%;
     margin: 0 auto;
+    padding-bottom: 38px;
 }
 
 .main__options{
@@ -224,6 +229,10 @@ main{
     border: 1px solid #5AC3FF;
     border-radius: 5px;
     margin-bottom: 6px;
+}
+
+.seat_selected{
+    background-color: #d9d9d9;
 }
 
 #seat_carriage_seats .coupe__seat{
