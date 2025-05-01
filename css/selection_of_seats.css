@@ -231,8 +231,12 @@ main{
     margin-bottom: 6px;
 }
 
+.booked_seat{
+    background-color: #D9D9D9;
+}
+
 .seat_selected{
-    background-color: #d9d9d9;
+    background-color: #b8d7ff;
 }
 
 #seat_carriage_seats .coupe__seat{
