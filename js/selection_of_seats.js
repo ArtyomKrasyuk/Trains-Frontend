@@ -2,7 +2,7 @@
 import { Seat } from "./seat.js";
 
 //let tripId = new URLSearchParams(window.location.search).get('tripId');
-let tripId = 1;
+let tripId = 3;
 
 let json = null;
 let coupesIndex = 0;
@@ -39,43 +39,57 @@ async function getSeats(){
             else if(element.type == 'Плацкарт') platzkarts.push(element);
             else if(element.type == 'СВ') svs.push(element);
             else seatCarriages.push(element);
-            if(coupes.length != 0) setCuopeCarriage(0);
-            let seats1 =  document.querySelectorAll('.coupe__seat');
-            let seats2 = document.querySelectorAll('.sv__seat');
-
-            for(let i = 0; i < seats1.length; i++) {
-                if(!seats1[i].classList.contains("booked_seat")) seats1[i].onclick = selectSeat;
-            }
-            for(let i = 0; i < seats2.length; i++) {
-                if(!seats2[i].classList.contains("booked_seat")) seats2[i].onclick = selectSeat;
-            }
-
-            if(coupes.length == 0) {
-                document.getElementById('coupe').hidden = true;
-                document.getElementById('coupe_a').hidden = true;
-            }
-            if(platzkarts.length == 0) {
-                document.getElementById('platzkart').hidden = true;
-                document.getElementById('platzkart_a').hidden = true;
-            }
-            if(svs.length == 0) {
-                document.getElementById('sv').hidden = true;
-                document.getElementById('sv_a').hidden = true;
-            }
-            if(seatCarriages.length == 0) {
-                document.getElementById('seat_carriage').hidden = true;
-                document.getElementById('seat_carriage_a').hidden = true;
-            }
-
-            let coupeMinPrice = 100000000;
-            coupes.forEach(coupe=>{
-                coupe.places.forEach(place=>{
-                    if(place.price < coupeMinPrice) coupeMinPrice = place.price;
-                });
-            });
-            document.getElementById("coupe_a").innerHTML = '<p class="option__title">Купе</p>' + `<p class="option__price">от ${coupeMinPrice}₽</p>`;
-            setArrows();
         });
+        if(coupes.length == 0) {
+            document.getElementById('coupe').hidden = true;
+            document.getElementById('coupe_a').hidden = true;
+        }
+        if(platzkarts.length == 0) {
+            document.getElementById('platzkart').hidden = true;
+            document.getElementById('platzkart_a').hidden = true;
+        }
+        if(svs.length == 0) {
+            document.getElementById('sv').hidden = true;
+            document.getElementById('sv_a').hidden = true;
+        }
+        if(seatCarriages.length == 0) {
+            document.getElementById('seat_carriage').hidden = true;
+            document.getElementById('seat_carriage_a').hidden = true;
+        }
+        if(coupes.length != 0) setCuopeCarriage(0);
+        if(platzkarts.length != 0) setPlatzkartCarriage(0);
+        if(svs.length != 0) setSvCarriage(0);
+        if(seatCarriages.length != 0) setSeatCarriage(0);
+
+        let coupeMinPrice = 100000000;
+        coupes.forEach(coupe=>{
+            coupe.places.forEach(place=>{
+                if(place.price < coupeMinPrice) coupeMinPrice = place.price;
+            });
+        });
+        document.getElementById("coupe_a").innerHTML = '<p class="option__title">Купе</p>' + `<p class="option__price">от ${coupeMinPrice}₽</p>`;
+        let platzkartMinPrice = 100000000;
+        platzkarts.forEach(platzkart=>{
+            platzkart.places.forEach(place=>{
+                if(place.price < platzkartMinPrice) platzkartMinPrice = place.price;
+            });
+        });
+        document.getElementById("platzkart_a").innerHTML = '<p class="option__title">Плацкарт</p>' + `<p class="option__price">от ${platzkartMinPrice}₽</p>`;
+        let svMinPrice = 100000000;
+        svs.forEach(sv=>{
+            sv.places.forEach(place=>{
+                if(place.price < svMinPrice) svMinPrice = place.price;
+            });
+        });
+        document.getElementById("sv_a").innerHTML = '<p class="option__title">СВ</p>' + `<p class="option__price">от ${svMinPrice}₽</p>`;
+        let seatCarriageMinPrice = 100000000;
+        seatCarriages.forEach(seatCarriage=>{
+            seatCarriage.places.forEach(place=>{
+                if(place.price < seatCarriageMinPrice) seatCarriageMinPrice = place.price;
+            });
+        });
+        document.getElementById("seat_carriage_a").innerHTML = '<p class="option__title">Сидячий</p>' + `<p class="option__price">от ${seatCarriageMinPrice}₽</p>`;
+        setArrows();
     }
 }
 
@@ -121,13 +135,41 @@ function setArrows(){
         setCuopeCarriage(coupesIndex);
         setArrows();
     }
+    platzkart_right.onclick = function(e){
+        platzkartsIndex++;
+        setPlatzkartCarriage(platzkartsIndex);
+        setArrows();
+    }
+    platzkart_left.onclick = function(e){
+        platzkartsIndex--;
+        setPlatzkartCarriage(platzkartsIndex);
+        setArrows();
+    }
+    sv_right.onclick = function(e){
+        svsIndex++;
+        setSvCarriage(svsIndex);
+        setArrows();
+    }
+    sv_left.onclick = function(e){
+        svsIndex--;
+        setSvCarriage(svsIndex);
+        setArrows();
+    }
+    seat_carriage_right.onclick = function(e){
+        seatCarriagesIndex++;
+        setSeatCarriage(seatCarriagesIndex);
+        setArrows();
+    }
+    seat_carriage_left.onclick = function(e){
+        seatCarriagesIndex--;
+        setSeatCarriage(seatCarriagesIndex);
+        setArrows();
+    }
 }
 
 function setCuopeCarriage(index){
     let carriage = coupes[index];
     let numberOfSeatsCoupe = carriage.numberOfSeats;
-    let type = 'Смешанное купе';
-    let array = type.split(' ');
     let number = carriage.number;
     let minPrice = 10000000;
     let maxPrice = 0;
@@ -144,10 +186,14 @@ function setCuopeCarriage(index){
     div1.innerHTML= '';
     div1.insertAdjacentHTML('beforeend', str1);
     if(numberOfSeatsCoupe % 4 == 0){
-        for(let i = 0; i < numberOfSeatsCoupe - 1; i+=4){
+        for(let i = 0; i < numberOfSeatsCoupe; i+=4){
             if(i == numberOfSeatsCoupe - 4) fillCoupe(carriage, i, true);
             else fillCoupe(carriage, i, false);
         }
+    }
+    let seats1 =  document.querySelectorAll('.coupe__seat');
+    for(let i = 0; i < seats1.length; i++) {
+        if(!seats1[i].classList.contains("booked_seat")) seats1[i].onclick = selectSeat;
     }
 }
 
@@ -167,35 +213,55 @@ function fillCoupe(carriage, number, last){
                 `<div class="coupe ${add}">`+
                     '<div class="coupe__seats">';
     for(let i = 0; i < 4; i++){
-        let pos = '';
-        if(i == 0 || i == 1) pos = 'верхнее';
-        else pos = 'нижнее';
         
         let selected = false;
         selectedSeats.forEach(seat =>{
-            if(places[i].position = seat.seatNumber && carriage.number == seat.carriageNumber) selected = true;
+            if(places[i].position == seat.seatNumber && carriage.number == seat.carriageNumber) selected = true;
         })
 
         if(selected){
-            str += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽, ${pos}">`+
+            if(i == 0 || i == 1){
+                str += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽, верхнее">`+
                             '<img src="img/strela_up.png" alt="" class="seat__img_top">'+
                             `<p class="seat__number_top number">${places[i].position}</p>`+
                             `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
                             `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
                             `<p class="price" style="display: none;">${places[i].price}</p>`+
                         '</div>';
-            continue;
+                continue;
+            }
+            else{
+                str += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽, нижнее">`+
+                            `<p class="seat__number_bottom number">${places[i].position}</p>`+
+                            '<img src="img/strela_down.png" alt="" class="seat__img_bottom">'+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+                continue;
+            }
         }
 
         let booked = '';
         if(places[i].booked) booked = 'booked_seat';
-        str += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽, ${pos}">`+
+        if(i == 0 || i == 1){
+            str += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽, верхнее">`+
                             '<img src="img/strela_up.png" alt="" class="seat__img_top">'+
                             `<p class="seat__number_top number">${places[i].position}</p>`+
                             `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
                             `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
                             `<p class="price" style="display: none;">${places[i].price}</p>`+
                         '</div>';
+        }
+        else{
+            str += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽, нижнее">`+
+                            `<p class="seat__number_bottom number">${places[i].position}</p>`+
+                            '<img src="img/strela_down.png" alt="" class="seat__img_bottom">'+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+        }
     }
 
     str += '</div>'+
@@ -218,144 +284,249 @@ function getCoupeType(places){
     else return 'Смешанное<br>купе';
 }
 
-let type = 'Смешанное купе';
-let array = type.split(' ');
-let newType = array[0] + '<br>' + array[1];
-
-/*
-// response body
-let numberOfSeatsCoupe = 36;
-let type = 'Смешанное купе';
-let array = type.split(' ');
-let newType = array[0] + '<br>' + array[1];
-let str1 = `<p class="carriage__number">12 вагон</p>`+
-    `<p class="carriage__seats">${numberOfSeatsCoupe} мест</p>`+
-    `<p class="carriage__price">2134 - 4234₽</p>`;
-let div1 = document.getElementById('coupe_info');
-div1.insertAdjacentHTML('beforeend', str1);
-if(numberOfSeatsCoupe % 4 == 0){
-    for(let i = 1; i < numberOfSeatsCoupe; i+=4){
-        if(i == numberOfSeatsCoupe - 3) fillCoupe(i, newType, true);
-        else fillCoupe(i, newType, false);
+function setPlatzkartCarriage(index){
+    let carriage = platzkarts[index]
+    let numberOfSeatsPlatzkart = carriage.numberOfSeats;
+    let number = carriage.number;
+    let minPrice = 10000000;
+    let maxPrice = 0;
+    carriage.places.forEach(place=>{
+        if(place.price < minPrice) minPrice = place.price;
+        if(place.price > maxPrice) maxPrice = place.price;
+    })
+    let str2 = `<p class="carriage__number">${number} вагон</p>`+
+        `<p class="carriage__seats">${numberOfSeatsPlatzkart} мест</p>`+
+        `<p class="carriage__price">${minPrice} - ${maxPrice}₽</p>`;
+    let div = document.getElementById('platzkart_seats');
+    div.innerHTML = '';
+    let div1 = document.getElementById('platzkart_bottom_seats');
+    div1.innerHTML = '';
+    let div2 = document.getElementById('platzkart_info');
+    div2.innerHTML = '';
+    div2.insertAdjacentHTML('beforeend', str2);
+    if(numberOfSeatsPlatzkart % 6 == 0){
+        for(let i = 0; i < numberOfSeatsPlatzkart; i+=6){
+            if(i == numberOfSeatsPlatzkart - 6) fillPlatzkart(carriage, i, true);
+            else fillPlatzkart(carriage, i, false);
+        }
     }
-}*/
-
-
-
-// response body
-let numberOfSeatsPlatzkart = 60;
-let str2 = `<p class="carriage__number">12 вагон</p>`+
-    `<p class="carriage__seats">${numberOfSeatsPlatzkart} мест</p>`+
-    `<p class="carriage__price">2134₽</p>`;
-let div2 = document.getElementById('platzkart_info');
-div2.insertAdjacentHTML('beforeend', str2);
-if(numberOfSeatsPlatzkart % 6 == 0){
-    for(let i = 1; i < numberOfSeatsPlatzkart; i+=6){
-        if(i == numberOfSeatsPlatzkart - 5) fillPlatzkart(i, true);
-        else fillPlatzkart(i, false);
+    let seats1 =  document.querySelectorAll('.coupe__seat');
+    for(let i = 0; i < seats1.length; i++) {
+        if(!seats1[i].classList.contains("booked_seat")) seats1[i].onclick = selectSeat;
     }
 }
 
-
-
-// response body
-let numberOfSeatsSV = 20;
-let str3 = `<p class="carriage__number">12 вагон</p>`+
-    `<p class="carriage__seats">${numberOfSeatsSV} мест</p>`+
-    `<p class="carriage__price">4234₽</p>`;
-let div3 = document.getElementById('sv_info');
-div3.insertAdjacentHTML('beforeend', str3);
-if(numberOfSeatsSV % 2 == 0){
-    for(let i = 1; i < numberOfSeatsSV; i+=2){
-        if(i == numberOfSeatsSV - 1) fillSV(i, newType, true);
-        else fillSV(i, newType, false);
-    }
-}
-
-
-
-// response body
-let numberOfSeatsSeatCarriage = 96;
-let block1 = 3;
-let block2 = 3;
-let str4 = `<p class="carriage__number">12 вагон</p>`+
-    `<p class="carriage__seats">${numberOfSeatsSeatCarriage} мест</p>`+
-    `<p class="carriage__price">4234₽</p>`;
-let div4= document.getElementById('seat_carriage_info');
-div4.insertAdjacentHTML('beforeend', str4);
-if(numberOfSeatsSeatCarriage % (block1 + block2) == 0){
-    for(let i = 1; i < numberOfSeatsSeatCarriage; i+=(block1 + block2)){
-        fillSeatCarriage(i, block1, block2);
-    }
-}
-
-
-function fillPlatzkart(number, last){
+function fillPlatzkart(carriage, number, last){
     let add = '';
     let addBottom = '';
     if(last) {
         add = 'last_coupe';
         addBottom = 'last_coupe_bottom';
     }
+    let places = [];
+    places.push(carriage.places[number]);
+    places.push(carriage.places[number+1]);
+    places.push(carriage.places[number+2]);
+    places.push(carriage.places[number+3]);
+    places.push(carriage.places[number+4]);
+    places.push(carriage.places[number+5]);
+
 
     let str = '<div class="coupe__wrapper">'+
-                `<div class="coupe ${add}">`+
-                    '<div class="coupe__seats">'+
-                        '<div class="coupe__seat" data-tooltip="2134₽, верхнее">'+
+        `<div class="coupe ${add}">`+
+            '<div class="coupe__seats">';
+    for(let i = 0; i < 4; i++){
+
+        let selected = false;
+        selectedSeats.forEach(seat =>{
+            if(places[i].position == seat.seatNumber && carriage.number == seat.carriageNumber) selected = true;
+        })
+
+        if(selected){
+            if(i == 0 || i == 1){
+                str += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽, верхнее">`+
                             '<img src="img/strela_up.png" alt="" class="seat__img_top">'+
-                            `<p class="seat__number_top number">${number+1}</p>`+
-                        '</div>'+
-                        '<div class="coupe__seat" data-tooltip="2134₽, верхнее">'+
-                                '<img src="img/strela_up.png" alt="" class="seat__img_top">'+
-                                `<p class="seat__number_top number">${number+3}</p>`+
-                        ' </div>'+
-                        '<div class="coupe__seat" data-tooltip="2134₽, нижнее">'+
-                            `<p class="seat__number_bottom number">${number}</p>`+
+                            `<p class="seat__number_top number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+                continue;
+            }
+            else{
+                str += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽, нижнее">`+
+                            `<p class="seat__number_bottom number">${places[i].position}</p>`+
                             '<img src="img/strela_down.png" alt="" class="seat__img_bottom">'+
-                        '</div>'+
-                        '<div class="coupe__seat" data-tooltip="2134₽, нижнее">'+
-                            `<p class="seat__number_bottom number">${number+2}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+                continue;
+            }
+        }
+
+        let booked = '';
+        if(places[i].booked) booked = 'booked_seat';
+        if(i == 0 || i == 1){
+            str += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽, верхнее">`+
+                            '<img src="img/strela_up.png" alt="" class="seat__img_top">'+
+                            `<p class="seat__number_top number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+        }
+        else{
+            str += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽, нижнее">`+
+                            `<p class="seat__number_bottom number">${places[i].position}</p>`+
                             '<img src="img/strela_down.png" alt="" class="seat__img_bottom">'+
-                        '</div>'+
-                    '</div>'+
-                '</div>'+
-            '</div>';
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+        }
+    }
+
+    str += '</div>'+
+        '</div>'+
+    '</div>';
     let div = document.getElementById('platzkart_seats');
     div.insertAdjacentHTML('beforeend', str);
 
     let str1 = 
     '<div class="coupe__wrapper">'+
         `<div class="coupe_bottom ${addBottom}">`+
-            '<div class="coupe__seats_bottom">'+
-                '<div class="coupe__seat" data-tooltip="2134₽, нижнее">'+
-                    `<p class="seat__number_bottom number">${number+4}</p>`+
-                    '<img src="img/strela_down.png" alt="" class="seat__img_bottom">'+
-            '</div>'+
-                '<div class="coupe__seat" data-tooltip="2134₽, верхнее">'+
-                    '<img src="img/strela_up.png" alt="" class="seat__img_top">'+
-                    `<p class="seat__number_top number">${number+5}</p>`+
-                '</div>'+
-            '</div>'+
+            '<div class="coupe__seats_bottom">';
+    for(let i = 4; i < 6; i++){
+        let pos = '';
+        if(i == 4) pos = 'нижнее';
+        else pos = 'верхнее';
+
+        let selected = false;
+        selectedSeats.forEach(seat =>{
+        if(places[i].position == seat.seatNumber && carriage.number == seat.carriageNumber) selected = true;
+        })
+
+        if(selected){
+            if(i == 5){
+                str1 += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽, верхнее">`+
+                            '<img src="img/strela_up.png" alt="" class="seat__img_top">'+
+                            `<p class="seat__number_top number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+                continue;
+            }
+            else{
+                str1 += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽, нижнее">`+
+                            `<p class="seat__number_bottom number">${places[i].position}</p>`+
+                            '<img src="img/strela_down.png" alt="" class="seat__img_bottom">'+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+                continue;
+            }
+        }
+
+        let booked = '';
+        if(places[i].booked) booked = 'booked_seat';
+        if(i == 5){
+            str1 += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽, верхнее">`+
+                            '<img src="img/strela_up.png" alt="" class="seat__img_top">'+
+                            `<p class="seat__number_top number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+        }
+        else{
+            str1 += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽, нижнее">`+
+                            `<p class="seat__number_bottom number">${places[i].position}</p>`+
+                            '<img src="img/strela_down.png" alt="" class="seat__img_bottom">'+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+        }
+    }
+    str1 += '</div>'+
         '</div>'+
     '</div>';
     let div1 = document.getElementById('platzkart_bottom_seats');
     div1.insertAdjacentHTML('beforeend', str1);
 }
 
-function fillSV(number, type, last){
+function setSvCarriage(index){
+    let carriage = svs[index];
+    let numberOfSeatsSV = carriage.numberOfSeats;
+    let number = carriage.number;
+    let minPrice = 10000000;
+    let maxPrice = 0;
+    carriage.places.forEach(place=>{
+        if(place.price < minPrice) minPrice = place.price;
+        if(place.price > maxPrice) maxPrice = place.price;
+    })
+    let str1 = `<p class="carriage__number">${number} вагон</p>`+
+        `<p class="carriage__seats">${numberOfSeatsSV} мест</p>`+
+        `<p class="carriage__price">${minPrice} - ${maxPrice}₽</p>`;
+    let div = document.getElementById('sv_seats');
+    div.innerHTML = '';
+    let div1 = document.getElementById('sv_info');
+    div1.innerHTML= '';
+    div1.insertAdjacentHTML('beforeend', str1);
+    if(numberOfSeatsSV % 2 == 0){
+        for(let i = 0; i < numberOfSeatsSV; i+=2){
+            if(i == numberOfSeatsSV - 2) fillSV(carriage, i, true);
+            else fillSV(carriage, i, false);
+        }
+    }
+    let seats2 = document.querySelectorAll('.sv__seat');
+    for(let i = 0; i < seats2.length; i++) {
+        if(!seats2[i].classList.contains("booked_seat")) seats2[i].onclick = selectSeat;
+    }
+}
+
+function fillSV(carriage, number, last){
     let add = '';
     if(last) add = 'last_coupe';
+    let places = [];
+    places.push(carriage.places[number]);
+    places.push(carriage.places[number+1]);
+
+    let type = getCoupeType(places);
 
     let str = '<div class="coupe__wrapper">'+
                 `<div class="coupe ${add}">`+
-                    '<div class="coupe__seats">'+
-                        '<div class="sv__seat" data-tooltip="4234₽">'+
-                            `<p class="seat__number_sv number">${number}</p>`+
-                        '</div>'+
-                        '<div class="sv__seat" data-tooltip="4234₽">'+
-                            `<p class="seat__number_sv number">${number+1}</p>`+
-                        ' </div>'+
-                    '</div>'+
+                    '<div class="coupe__seats">';
+    for(let i = 0; i < 2; i++){
+        
+        let selected = false;
+        selectedSeats.forEach(seat =>{
+            if(places[i].position == seat.seatNumber && carriage.number == seat.carriageNumber) selected = true;
+        })
+
+        if(selected){
+            str += `<div class="sv__seat seat_selected" data-tooltip="${places[i].price}₽">`+
+                            `<p class="seat__number_sv number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+                continue;
+        }
+
+        let booked = '';
+        if(places[i].booked) booked = 'booked_seat';
+        str += `<div class="sv__seat ${booked}" data-tooltip="${places[i].price}₽">`+
+                            `<p class="seat__number_sv number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+    }
+    str +=        '</div>'+
                 '</div>'+
                 `<p class="coupe__type">${type}</p>`+
             '</div>';
@@ -363,20 +534,98 @@ function fillSV(number, type, last){
     div.insertAdjacentHTML('beforeend', str);
 }
 
-function fillSeatCarriage(number, block1, block2){
+function setSeatCarriage(index){
+    let carriage = seatCarriages[index];
+    let block1 = carriage.topBlockWidth;
+    let block2 = carriage.bottomBlockWidth;
+    let numberOfSeatsSeatCarriage = carriage.numberOfSeats;
+    let number = carriage.number;
+    let minPrice = 10000000;
+    let maxPrice = 0;
+    carriage.places.forEach(place=>{
+        if(place.price < minPrice) minPrice = place.price;
+        if(place.price > maxPrice) maxPrice = place.price;
+    })
+    let str1 = `<p class="carriage__number">${number} вагон</p>`+
+        `<p class="carriage__seats">${numberOfSeatsSeatCarriage} мест</p>`+
+        `<p class="carriage__price">${minPrice} - ${maxPrice}₽</p>`;
+    let div = document.getElementById('seat_carriage_seats');
+    div.innerHTML = '';
+    let div1 = document.getElementById('seat_carriage_info');
+    div1.innerHTML= '';
+    let div2 = document.getElementById('seat_carriage_bottom_seats');
+    div2.innerHTML = '';
+    div1.insertAdjacentHTML('beforeend', str1);
+    if(numberOfSeatsSeatCarriage % (block1 + block2) == 0){
+        for(let i = 0; i < numberOfSeatsSeatCarriage; i+=(block1 + block2)){
+            fillSeatCarriage(carriage, i, block1, block2);
+        }
+    }
+    let seats1 =  document.querySelectorAll('.coupe__seat');
+    for(let i = 0; i < seats1.length; i++) {
+        if(!seats1[i].classList.contains("booked_seat")) seats1[i].onclick = selectSeat;
+    }
+}
+
+function fillSeatCarriage(carriage, number, block1, block2){
+    let places = [];
+    for(let i = 0; i < block1+block2; i++) places.push(carriage.places[number+i]);
+
     let str6 = '<div class="seat_block">';
     for(let i = 0; i < block1; i++){
-        str6 += '<div class="coupe__seat" data-tooltip="2134₽">'+
-                    `<p class="seat__number number">${number+i}</p>`+
-               ' </div>';
+        
+        let selected = false;
+        selectedSeats.forEach(seat =>{
+            if(places[i].position == seat.seatNumber && carriage.number == seat.carriageNumber) selected = true;
+        })
+
+        if(selected){
+            str6 += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽">`+
+                            `<p class="seat__number number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+                continue;
+        }
+
+        let booked = '';
+        if(places[i].booked) booked = 'booked_seat';
+        str6 += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽">`+
+                            `<p class="seat__number number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
     }
     str6 += '</div>'
 
     let str7 = '<div class="seat_block bottom_block">';
-    for(let i = 0; i < block2; i++){
-        str7 += '<div class="coupe__seat" data-tooltip="2134₽">'+
-                    `<p class="seat__number number">${number+block1+i}</p>`+
-               ' </div>';
+    for(let i = block1; i < block1+block2; i++){
+        
+        let selected = false;
+        selectedSeats.forEach(seat =>{
+            if(places[i].position == seat.seatNumber && carriage.number == seat.carriageNumber) selected = true;
+        })
+
+        if(selected){
+            str7 += `<div class="coupe__seat seat_selected" data-tooltip="${places[i].price}₽">`+
+                            `<p class="seat__number number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
+                continue;
+        }
+
+        let booked = '';
+        if(places[i].booked) booked = 'booked_seat';
+        str7 += `<div class="coupe__seat ${booked}" data-tooltip="${places[i].price}₽">`+
+                            `<p class="seat__number number">${places[i].position}</p>`+
+                            `<p class="carriage_number" style="display: none;">${carriage.number}</p>`+
+                            `<p class="carriage_type" style="display: none;">${carriage.type}</p>`+
+                            `<p class="price" style="display: none;">${places[i].price}</p>`+
+                        '</div>';
     }
     str7 += '</div>';
 
@@ -403,7 +652,6 @@ function selectSeat(e){
         }
         checkButtons();
     }
-
 }
 
 function checkButtons(){
