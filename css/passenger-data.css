@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #EDF2FA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 1%;
+}
+
+.top-bar {
+  width: 100%;
+  height: 86px;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.top-bar .title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-650px);
+  font-size: 36px;
+  letter-spacing: -1.44px;
+  color: #356286;
+}
+
+.top-bar .icon-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-731px);
+  width: 60px;
+  height: 60px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .icon {
+    width: 100%;
+    height: 100%;
+    margin-right: 8px;
+}
+
+.content-area{
+    padding-top:27px;
+    padding-bottom: 58px;
+    width: 1300px;
+    height: auto;
+    left: 50%;
+    transform: translateX(-650px);
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+}
+
+.content-area::before{
+    content: "Заполните данные";
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+    font-size: 64px;
+    align-self: center;
+}
+
+.content-area .data-form{
+    height: 592px;
+    background-color: #FFFFFF;
+    padding-top: 18px;
+    padding-bottom: 48px;
+    padding-left: 55px;
+    padding-right: 55px;
+    border-radius: 25px;
+    gap: 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.data-form::before{
+    content: "Пассажир";
+    font-size: 40px;
+    line-height: 47px;
+}
+
+.input-box{
+    height: 50px;
+    background-color: #FFFFFF;
+    border: 1px solid #5495B2;
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+    padding-left: 13px;
+}
+
+.data-form .FIO-area{
+    height: 106px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.FIO-area .lastname-area{
+    width: 350px;
+    height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.lastname-area .input-box{
+    border-radius: 15px 0 0 15px;
+}
+
+.lastname-area::before{
+    content: "Фамилия";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+.FIO-area .firstname-area{
+    width: 350px;
+    height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.firstname-area .input-box{
+    border: 1px solid #5495B2;
+    border-left: none;
+    border-right: none;
+}
+
+.firstname-area::before{
+    content: "Имя";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+.FIO-area .middlename-area{
+    width: 350px;
+    height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.middlename-area .input-box{
+    border-radius: 0 15px 15px 0;
+}
+
+.middlename-area::before{
+    content: "Отчество";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+
+.data-form .gender-birthdate-area{
+    height: 106px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 114px;
+}
+
+.gender-birthdate-area .gender-area{
+    width: 130px;
+    height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gender-area .buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.gender-area .male-button{
+    height: 50px;
+    width: 50%;
+    background-color: #FFFFFF;
+    border: 1px solid #5495B2;
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+    align-content: center;
+    text-align: center;
+    color: #5495B2;
+    border-radius: 15px 0 0 15px;
+    cursor:pointer;
+}
+
+.gender-area .female-button{
+    height: 50px;
+    width: 50%;
+    background-color: #FFFFFF;
+    border: 1px solid #5495B2;
+    border-left: none;
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+    align-content: center;
+    text-align: center;
+    color: #5495B2;
+    border-radius: 0 15px 15px 0;
+    cursor:pointer;
+}
+
+.gender-area .active {
+  background-color: #5495B2;
+  color: #FFFFFF;
+}
+
+.gender-area::before{
+    content: "Пол";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+.gender-birthdate-area .birthdate-area{
+    width: 235px;
+    height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.birthdate-area .input-box{
+    border-radius: 15px 15px 15px 15px;
+}
+
+.birthdate-area::before{
+    content: "Дата рождения";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+.data-form .passport-area{
+    height: 106px;
+    width: 360px;
+}
+
+.passport-area .input-box{
+    border-radius: 15px;
+    width: 100%;
+}
+
+.passport-area::before{
+    content: "Паспорт";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+
+.data-form .contact-data-area{
+    height: 94px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 87px;
+}
+
+.contact-data-area .phone-area{
+    width: 360px;
+    height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.phone-area .input-box{
+    border-radius: 15px;
+}
+
+.phone-area::before{
+    content: "Моб. телефон";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+.contact-data-area .email-area{
+    width: 360px;
+    height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.email-area .input-box{
+    border-radius: 15px;
+}
+
+.email-area::before{
+    content: "Эл. почта";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+.content-area .privacy-area{
+    height: 82px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 21px;
+
+}
+
+.privacy-area .acceptation-button{
+    width: 34px;
+    height: 34px;
+    border-radius: 2px;
+    border: 1px solid #5495B2;
+    cursor: pointer;
+    background-color: #EDF2FA;
+}
+
+.privacy-area::after{
+    content: "Даю согласие на обработку персональных данных";
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 400;
+}
+
+.content-area .continue-button{
+    height: 80px;
+    width: 280px;
+    border-radius: 7px;
+    border: 1px solid #356286;
+    background-color: #FFFFFF;
+    cursor: pointer;
+
+    font-weight: 500;
+    font-size: 36px;
+    color: #356286;
+    letter-spacing: 0;
+}
+
+.continue-button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  border-color: #666666;
+  cursor: not-allowed;
+}
+
+.continue-button[disabled]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 10;
+}
+
+.continue-button[disabled]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}

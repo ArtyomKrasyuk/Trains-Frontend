@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #EDF2FA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 1%;
+}
+
+.top-bar {
+  width: 100%;
+  height: 86px;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.top-bar .title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-650px);
+  font-size: 36px;
+  letter-spacing: -1.44px;
+  color: #356286;
+}
+
+.top-bar .icon-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-731px);
+  width: 60px;
+  height: 60px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .icon {
+    width: 100%;
+    height: 100%;
+    margin-right: 8px;
+}
+
+.content-area{
+    padding-top:27px;
+    padding-bottom: 100px;
+    width: 1190px;
+    height: auto;
+    left: 50%;
+    transform: translateX(-595px);
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+}
+
+.content-area::before{
+    content: "Подтвердите бронирование";
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    font-size: 64px;
+    align-self: center;
+}
+
+.content-area .label{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0;
+    height: 30px;
+}
+
+.content-area .trip-data{
+    width: 100%;
+    padding-top: 9px;
+    padding-left: 55px;
+    padding-bottom: 17px;
+    padding-right: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 15.4px 0 rgba(0, 0, 0, 0.09);
+}
+
+.trip-data::before{
+    font-weight: 700;
+    content: "Детали поездки";
+    font-size: 32px;
+    height: 38px;
+}
+
+.trip-data .form{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.trip-data .form .train-data{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+
+.train-data .cities-label{
+    font-weight: 700;
+    font-size: 24px;
+    color: #356286;
+    max-width: 350px;
+}
+
+.train-data .train-name-label{
+    font-weight: 400;
+    font-size: 24px;
+    color: #4B4A4A;
+}
+
+.trip-data .form .route-area {
+  width: 699px;
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  justify-content: flex-start;
+  align-items: stretch;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.route-area::after {
+  content: '';
+  display: block;
+  width: 311px;
+  height: 1px;
+  background-color: #000000;
+  margin-left: 126px;
+  margin-top: 45px;
+}
+
+.route-area .departure-time-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.route-area .arrival-time-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.route-area .departure-time-area .date {
+  align-self: flex-start;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #4B4A4A;
+}
+
+.route-area .departure-time-area .time {
+  align-self: flex-start;
+  font-size: 40px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.route-area .arrival-time-area .date {
+  align-self: flex-end;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #4B4A4A;
+}
+
+.route-area .arrival-time-area .arrival-time-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-end;
+}
+
+.arrival-time-group .time {
+  font-size: 40px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.arrival-time-group .label {
+  font-size: 36px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #4B4A4A;
+}
+
+.trip-data .form .seat-info-area{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 21px;
+}
+
+.seat-info-area .wagon,
+.seat-info-area .seat,
+.seat-info-area .wagon-type{
+    height: 25px;
+    width: 63px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.seat-info-area .wagon::before {
+    height: 25px;
+    content: "вагон";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.seat-info-area .seat::before {
+    height: 25px;
+    content: "место";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.seat-info-area .wagon-type::before {
+    height: 25px;
+    content: "тип";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.content-area .passenger-data{
+    width: 100%;
+    padding-top: 12px;
+    padding-left: 55px;
+    padding-bottom: 23px;
+    padding-right: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 15.4px 0 rgba(0, 0, 0, 0.09);
+}
+
+.passenger-data::before{
+    font-weight: 700;
+    content: "Данные пассажира";
+    font-size: 32px;
+    height: 38px;
+}
+
+.passenger-data .personal-data{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    height: 48px;
+}
+
+.personal-data .lastname,
+.personal-data .firstname,
+.personal-data .middlename,
+.personal-data .birthdate{
+    width: 185px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.personal-data .gender{
+    width: 100px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.personal-data .lastname::before {
+    content: "Фамилия";
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.personal-data .firstname::before {
+    content: "Имя";
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.personal-data .middlename::before {
+    content: "Отчество";
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.personal-data .gender::before {
+    content: "Пол";
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.personal-data .birthdate::before {
+    content: "Дата рождения";
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.passenger-data .passport-number{
+    display: flex;
+    flex-direction: column;
+    height: 48px;
+    font-size: 24px;
+    justify-content: space-between;
+}
+
+.passenger-data .passport-number::before {
+    content: "Паспорт";
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.passenger-data .contact-data{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    height: 48px;
+}
+
+.contact-data .phone-number,
+.contact-data .email{
+    width: 185px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact-data .phone-number::before {
+    content: "Моб. телефон";
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.contact-data .email::before {
+    content: "Эл. почта";
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.content-area .hint-label{
+    font-family: "Ubuntu", sans-serif;
+    letter-spacing: 0;
+    font-size: 16px;
+    height: 18px;
+    display: block;
+}
+
+.confirm-button{
+    top: 56px;
+    width: 280px;
+    height: 80px;
+    border-radius: 7px;
+    border: 1px solid #356286;
+    background-color: #FFFFFF;
+    cursor: pointer;
+
+    font-weight: 500;
+    font-size: 36px;
+    color: #356286;
+    letter-spacing: 0;
+}

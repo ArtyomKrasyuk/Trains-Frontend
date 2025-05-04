@@ -1,8 +1,15 @@
 'use strict'
-import { Seat } from "./seat.js";
+class Seat{
+    constructor(trainId, carriageNumber, carriageType, seatNumber, price){
+        this.trainId = trainId;
+        this.carriageNumber = carriageNumber;
+        this.carriageType = carriageType;
+        this.seatNumber = seatNumber;
+        this.price = price;
+    }
+}
 
-//let tripId = new URLSearchParams(window.location.search).get('tripId');
-let tripId = 3;
+let tripId = new URLSearchParams(window.location.search).get('tripId');
 
 let json = null;
 let coupesIndex = 0;
@@ -21,6 +28,42 @@ document.getElementById('coupe_btn').hidden = true;
 document.getElementById('platzkart_btn').hidden = true;
 document.getElementById('sv_btn').hidden = true;
 document.getElementById('seat_carriage_btn').hidden = true;
+
+let buttons = document.querySelectorAll('.footer__btn');
+for(let i = 0; i < buttons.length; i++){
+    buttons[i].onclick = async function(e){
+        let result = await checkAuth();
+        if (result) {
+            let array = [];
+            selectedSeats.forEach(seat=>{
+                let obj = {
+                    "trainId": seat.trainId,
+                    "carriageNumber": seat.carriageNumber,
+                    "carriageType": seat.carriageType,
+                    "seatNumber": seat.seatNumber,
+                    "price": seat.price
+                }
+                array.push(obj);
+            });
+            localStorage.setItem('selectedSeats', JSON.stringify(array));
+            window.location.href = `passenger-data.html?tripId=${tripId}`;
+        }
+        else window.location.href = 'login.html';
+    }
+}
+
+async function checkAuth(){
+    let url = 'http://127.0.0.1:8080/client/test';
+    let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        credentials: 'include'
+    });
+    if(response.ok) return true;
+    else return false;
+}
 
 async function getSeats(){
     let url = `http://127.0.0.1:8080/trip/${tripId}`;

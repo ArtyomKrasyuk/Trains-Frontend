@@ -11,11 +11,12 @@
         <div class="header__nav">
             <div class="nav__left">
                 <a href="#" class="nav__link">расписание</a>
-                <a href="#" class="nav__link">о нас</a>
+                <a href="#footer" class="nav__link">о нас</a>
                 <a href="#" class="nav__link">о системе</a>
             </div>
             <div class="nav__right">
-                <a href="login.html" class="nav__link">вход/регистрация</a>
+                <a href="login.html" class="nav__link" id="login">вход/регистрация</a>
+                <a href="#" class="nav__link" id="pesonal_account">личный кабинет</a>
             </div>
         </div>
         <p class="header__title">
@@ -67,6 +68,7 @@
                 </div>
             </div>
             <div class="schedule__trips">
+                <!--
                 <div class="trip">
                     <div class="trip__top">
                         <p class="top__path">Самара — Санкт-Петербург</p>
@@ -81,34 +83,7 @@
                             30, 31 марта, 1, 2, 3, 4, 5 апреля, …</div>
                     </div>
                 </div>
-                <div class="trip">
-                    <div class="trip__top">
-                        <p class="top__path">Самара — Санкт-Петербург</p>
-                        <p class="top__departure_time">00:24</p>
-                        <p class="top__duration">8 ч 28 мин</p>
-                        <p class="top__arrival_time">08:52</p>
-                        <div class="top__btn">Выбрать дату</div>
-                    </div>
-                    <div class="trip__bottom">
-                        <div class="bottom__number">050</div>
-                        <div class="bottom__dates">13, 14, 15, 16, 17, 19, 21, 22, 23, 24, 26, 28, 29,
-                            30, 31 марта, 1, 2, 3, 4, 5 апреля, …</div>
-                    </div>
-                </div>
-                <div class="trip">
-                    <div class="trip__top">
-                        <p class="top__path">Самара — Санкт-Петербург</p>
-                        <p class="top__departure_time">00:24</p>
-                        <p class="top__duration">8 ч 28 мин</p>
-                        <p class="top__arrival_time">08:52</p>
-                        <div class="top__btn">Выбрать дату</div>
-                    </div>
-                    <div class="trip__bottom">
-                        <div class="bottom__number">050</div>
-                        <div class="bottom__dates">13, 14, 15, 16, 17, 19, 21, 22, 23, 24, 26, 28, 29,
-                            30, 31 марта, 1, 2, 3, 4, 5 апреля, …</div>
-                    </div>
-                </div>
+                -->
             </div>
         </div>
         <div class="about_us">
@@ -128,7 +103,7 @@
         </div>
         <img src="img/MIR_OTKRYT.png" alt="" class="mir_img">
     </main>
-    <footer>
+    <footer id="footer">
         <p class="footer_text">
             над проектом работали<br>студенты гр. 6303-020302D:
         </p>
@@ -139,5 +114,6 @@
             <p class="footer__name">Петрова У.А.</p>
         </div>
     </footer>
+    <script src="js/index.js"></script>
 </body>
 </html>

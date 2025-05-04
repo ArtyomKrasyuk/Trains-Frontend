@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Данные пассажира</title>
+  <link rel="stylesheet" href="css/passenger-data.css">
+</head>
+<body>
+  <div class="top-bar">
+    <button class="icon-button" onclick="window.location.href='selection_of_seats.html'">  <!-- ссылка на страницу выбора мест -->
+        <img src="img/return.png" alt="Icon" class="icon">
+    </button>
+    <div class="title">Данные пассажира</div>
+  </div>
+  <div class="content-area">
+    <div class="data-form">
+      <div class="FIO-area">
+        <div class="lastname-area">
+          <input class="input-box" required id="lastname">
+        </div>
+        <div class="firstname-area">
+          <input class="input-box" required id="firstname">
+        </div>
+        <div class="middlename-area">
+          <input class="input-box" required id="patronymic">
+        </div>
+      </div>
+      <div class="gender-birthdate-area">
+        <div class="gender-area">
+          <div class="buttons">
+            <button class="male-button" id="male">М</button>
+            <div class="female-button" id="female">Ж</div>
+          </div>
+        </div>
+        <div class="birthdate-area">
+          <input class="input-box" required id="birthday">
+        </div>
+      </div>
+      <div class="passport-area">
+        <input class="input-box" required>
+      </div>
+      <div class="contact-data-area">
+        <div class="phone-area">
+          <input class="input-box" required id="phone">
+        </div>
+        <div class="email-area">
+          <input class="input-box" required id="email">
+        </div>
+      </div>
+    </div>
+    <div class="privacy-area">
+      <input type="checkbox" class="acceptation-button">
+    </div>
+    <button class="continue-button" disabled data-tooltip="Не все поля заполнены">Продолжить</button>  <!-- ссылка на страницу подтверждения брони -->
+  </div>
+  <script src="js/passenger-data.js"></script>
+</body>
+</html>
