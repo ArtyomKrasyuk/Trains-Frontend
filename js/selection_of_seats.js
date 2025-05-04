@@ -715,3 +715,7 @@ function checkButtons(){
         else seat_carriage.hidden = false;
     })
 }
+
+document.querySelector('.header__img').onclick = function(){
+    window.location.href = 'index.html';
+}

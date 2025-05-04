@@ -107,12 +107,13 @@ async function getClientData(){
 getClientData();
 
 document.querySelector('.continue-button').onclick = function(){
-  let firstname = document.getElementById("firstname");
-  let lastname = document.getElementById("lastname");
-  let patronymic = document.getElementById("patronymic");
-  let phone = document.getElementById("phone");
-  let email = document.getElementById("email");
-  let birthday = document.getElementById("birthday");
+  let firstname = document.getElementById("firstname").value;
+  let lastname = document.getElementById("lastname").value;
+  let patronymic = document.getElementById("patronymic").value;
+  let phone = document.getElementById("phone").value;
+  let email = document.getElementById("email").value;
+  let birthday = document.getElementById("birthday").value;
+  let passport = document.getElementById("passport").value;
 
   let gender = 0;
   if(male) gender = 1;
@@ -125,9 +126,14 @@ document.querySelector('.continue-button').onclick = function(){
     'phone': phone,
     'email': email,
     'gender': gender,
-    'birthday': birthday
+    'birthday': birthday,
+    'passport': passport
   }
 
   localStorage.setItem('clientData', JSON.stringify(obj));
   window.location.href = `booking-confirmation.html?tripId=${tripId}`;
+}
+
+document.querySelector('.icon-button').onclick = function(){
+  window.location.href = `selection_of_seats.html?tripId=${tripId}`;
 }
