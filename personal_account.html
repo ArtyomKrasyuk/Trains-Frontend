@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Личный кабинет</title>
+  <link rel="stylesheet" href="css/personal_account.css">
+</head>
+<body>
+  <div class="password_change_form">
+    <div class="form__top">
+        <h1 class="title">Сменить пароль</h1>
+        <img src="img/Close.png" alt="" id="close">
+    </div>
+    <p class="subtitle">Введите от 8 до 15 символов</p>
+    <div class="form__box">
+        <div class="form__row">
+            <p class="desc">текущий пароль</p>
+            <input type="password" class="form__input" id="current">
+        </div>
+        <div class="form__row">
+            <p class="desc">новый пароль пароль</p>
+            <input type="password" class="form__input" id="new">
+        </div>
+        <div class="form__row last_row">
+            <p class="desc">повторите новый пароль</p>
+            <input type="password" class="form__input" id="new_repeat"> 
+        </div>
+    </div>
+    <div class="confirm_btn">Сменить</div>
+  </div>
+
+  <div class="top-bar">
+    <button class="icon-button" onclick="window.location.href='index.html'">
+        <img src="img/return.png" alt="Icon" class="icon">
+    </button>
+    <div class="title">Личный кабинет</div>
+  </div>
+  <div class="content-area">
+    <div class="photo-panel"></div>
+    <div class="information-area">
+      <div class="FIO-panel">
+        <input class="input-box input-lastname" value="Фамилия" disabled>
+        <button class="icon-button" data-target="input-lastname">
+          <img src="img/edit-icon.png" alt="Icon" class="icon">
+        </button>
+      </div>
+      <div class="FIO-panel">
+        <input class="input-box input-firstname" value="Имя" disabled>
+        <button class="icon-button" data-target="input-firstname">
+          <img src="img/edit-icon.png" alt="Icon" class="icon">
+        </button>
+      </div>
+      <div class="FIO-panel">
+        <input class="input-box input-patronymic" value="Отчество" disabled>
+        <button class="icon-button" data-target="input-patronymic">
+          <img src="img/edit-icon.png" alt="Icon" class="icon">
+        </button>
+      </div>
+      <div class="profile-information-area">
+        <div class="information-point">
+          <p class="information-label">e-mail</p>
+          <div class="information-panel">
+            <input class="input-box input-mail" value="mailru@mail.ru" disabled>
+            <button class="icon-button" data-target="input-mail">
+              <img src="img/edit-icon.png" alt="Icon" class="icon">
+            </button>
+          </div>
+        </div>
+
+        <div class="information-point">
+          <p class="information-label">дата рождения</p>
+          <div class="information-panel">
+            <input class="input-box input-birth-date" value="XX.XX.XXXX" disabled>
+            <button class="icon-button" data-target="input-birth-date">
+              <img src="img/edit-icon.png" alt="Icon" class="icon">
+            </button>
+          </div>
+        </div>
+
+        <div class="information-point">
+          <p class="information-label">телефон</p>
+          <div class="information-panel">
+            <input class="input-box input-phone-number" value="+7 XXX XXX XX XX" disabled>
+            <button class="icon-button" data-target="input-phone-number">
+              <img src="img/edit-icon.png" alt="Icon" class="icon">
+            </button>
+          </div>
+        </div>
+
+        <div class="information-point">
+          <p class="information-label">пол</p>
+          <div class="information-panel">
+            <input class="input-box input-gender" value="Жен / Муж" disabled>
+            <button class="icon-button" data-target="input-gender">
+              <img src="img/edit-icon.png" alt="Icon" class="icon">
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="buttons-area">
+        <button class="button" onclick="window.location.href='my-tickets.html'">   <!-- Ссылка на страницу с билетами -->
+          <p class="button-text">Мои билеты</p>
+          <img src="img/redirect-icon.png" alt="Icon" class="icon">
+        </button>
+        <button class="button" id="password_btn"> 
+          <p class="button-text">Сменить пароль</p>
+        </button>
+        <button class="button" id="logout">
+          <p class="button-text" style="color: #A73A3A;">Выйти из профиля</p>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="js/personal_account.js"></script>
+</body>
+</html>

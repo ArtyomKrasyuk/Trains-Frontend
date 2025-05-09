@@ -98,7 +98,8 @@ async function getClientData(){
     patronymic.value = json.patronymic;
     email.value = json.login;
     phone.value = json.phone;
-    birthday.value = json.birthday;
+    if(json.birthday == '') birthday.value = '';
+    else birthday.value = json.birthday.slice(8,10) + '.' + json.birthday.slice(5,7) + '.' + json.birthday.slice(0,4);
     if(json.gender == 1) male.click();
     else if(json.gender == 2) female.click();
   }
