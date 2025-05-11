@@ -35,7 +35,7 @@ function setData(data){
 
     let diff = `${diffHrs} ч ${diffMin} м`;
 
-    let months = ['янв', 'фев', 'март', 'апр', 'май', 'июнь', 'июль', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    let months = ['янв', 'фев', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сен', 'окт', 'ноя', 'дек'];
 
     let str = '<div class="train-data">'+
         `<p class="cities-label">Самара - ${data.destination}</p>`+
@@ -43,11 +43,11 @@ function setData(data){
     '</div>'+
     '<div class="route-area">'+
         '<div class="departure-time-area">'+
-        `<p class="date">${departureDate.getDay()} ${months[departureDate.getMonth()]}</p>`+
+        `<p class="date">${departureDate.getDate()} ${months[departureDate.getMonth()]}</p>`+
         `<p class="time">${departureTime}</p>`+
         '</div>'+
         '<div class="arrival-time-area">'+
-        `<p class="date">${arrivalDate.getDay()} ${months[arrivalDate.getMonth()]}</p>`+
+        `<p class="date">${arrivalDate.getDate()} ${months[arrivalDate.getMonth()]}</p>`+
         '<div class="arrival-time-group">'+
             `<p class="time">${arrivalTime}</p>`+
             '<p class="label">(Самара)</p>'+

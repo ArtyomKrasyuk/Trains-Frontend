@@ -1,0 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #EDF2FA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.top-bar {
+  width: 100%;
+  height: 86px;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.top-bar .title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-650px);
+  font-size: 36px;
+  letter-spacing: -1.44px;
+  color: #356286;
+}
+
+.top-bar .icon-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-731px);
+  width: 60px;
+  height: 60px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .icon {
+    width: 100%;
+    height: 100%;
+    margin-right: 8px;
+}
+
+.content-area{
+    padding-top:102px;
+    padding-bottom: 96px;
+    width: 1300px;
+    height: auto;
+    left: 50%;
+    transform: translateX(-650px);
+    display: flex;
+    flex-direction: column;
+    gap: 196px;
+}
+
+.ticket-area{
+    width: 100%;
+    height: 700px;
+    display:flex;
+    flex-direction: column;
+}
+
+.ticket {
+  width: 100%;
+  height: 620px;
+  bottom: 0px;
+  background-color: white;
+  border-radius: 20px;
+  position: absolute;
+  box-shadow: 0px 32px 64px -12px rgba(0, 0, 0, 0.3);
+
+  overflow: visible;
+}
+
+.ticket::before, .ticket::after {
+  content: "";
+  position: absolute;                               /* Вырез для верхней части */
+  height: 18px;                           /* Радиус полукруга */
+  width: 40px;                            /* Диаметр полукруга */
+  background-color: white;                /* Цвет, чтобы закрыть часть фигуры */
+  border-radius: 50%;                     /* Делает полукруг */
+}
+
+.ticket::before {
+  right: 180px;                           /* Полукруг в верхней части, 200px от правого края */
+  top: 0px;                             /* Позиция полукруга относительно верхней части */
+  background-color: #EDF2FA;
+  border-radius: 0 0 20px 20px; /* Закругления только сверху */
+  box-shadow: inset 0px -3px 15px -12px rgba(0, 0, 0, 0.3);
+}
+
+.ticket::after {
+  bottom: 0px;
+  right: 180px;
+  background-color: #EDF2FA;
+  border-radius: 20px 20px 0 0; /* Закругления только сверху */
+
+  box-shadow: inset 0px 22px 64px -12px rgba(0, 0, 0, 0.3);
+}
+
+/* Псевдоэлемент для создания пунктирной линии */
+.ticket .dotted-line {
+  position: absolute;
+  top: 18px;                              /* Начинается чуть ниже верхнего полукруга */
+  bottom: 18px;                           /* Заканчивается чуть выше нижнего полукруга */
+  right: 199px;                           /* Центрируется по правому краю */
+  width: 0px;                             /* Ширина линии */
+  border: 1px dashed black;          /* Создание пунктирной линии */
+  border-color: #DEE1E6;
+}
+
+.ticket-area .cancel-button{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 60px;
+    width: 280px;
+    border: 1px solid rgba(0, 0, 0, 0.77);
+    border-radius: 15px;
+    background-color: #253246;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    color: #FFFFFF;
+    font-size: 30px;
+    letter-spacing: -4%;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.ticket-area .download-button{
+    position: absolute;
+    left: 0px;
+    top: 9px;
+    height: 43px;
+    width: 198px;
+    border: 1px solid rgba(0, 0, 0, 0.77);
+    color: rgba(0, 0, 0, 0.77);
+    border-radius: 15px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: -4%;
+    line-height: 24px;
+    background-color: #EDF2FA;
+    cursor: pointer;
+}
+
+.route-area {
+  position: absolute;
+  left: 85px;
+  width: 699px;
+  top: 193px;
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  justify-content: flex-start;
+  align-items: stretch;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.route-area::after {
+  content: '';
+  display: block;
+  width: 311px;
+  height: 1px;
+  background-color: #000000;
+  margin-left: 126px;
+  margin-top: 45px;
+}
+
+.route-area .departure-time-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.route-area .arrival-time-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.route-area .departure-time-area .date {
+  align-self: flex-start;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #4B4A4A;
+}
+
+.route-area .departure-time-area .time {
+  align-self: flex-start;
+  font-size: 40px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.route-area .arrival-time-area .date {
+  align-self: flex-end;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #4B4A4A;
+}
+
+.route-area .arrival-time-area .arrival-time-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-end;
+}
+
+.arrival-time-group .time {
+  font-size: 40px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.arrival-time-group .label {
+  font-size: 36px;
+  line-height: 25px;
+  letter-spacing: -0.04em;
+  color: #4B4A4A;
+}
+
+.ticket .departure-timedate-area{
+    position: absolute;
+    right: 31px;
+    top: 77px;
+    width: 138px;
+    height: 460px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.departure-timedate-area .date{
+    top: 0;
+    height: 73px;
+}
+
+.departure-timedate-area .time{
+    position: absolute;
+    bottom: 0;
+    height: 32px;
+    width: 100%;
+    font-size: 36px;
+    line-height: 25px;
+}
+
+.departure-timedate-area .date .day{
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 25px;
+}
+
+.departure-timedate-area .date .month{
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 25px;
+}
+
+.ticket .train-info-area{
+    height: 82px;
+    width: 800px;
+    top: 70px;
+    left: 85px;
+}
+
+.train-info-area .cities{
+    font-size: 48px;
+    height: 25px;
+    line-height: 25px;
+}
+
+.train-info-area .name{
+    position: absolute;
+    bottom: 0;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 25px;
+    height: 29px;
+}
+
+.ticket .ticket-info-area{
+    position: absolute;
+    left: 85px;
+    top: 297px;
+    gap: 41px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket .seat-info-area{
+    width: 231px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.seat-info-area .wagon,
+.seat-info-area .seat,
+.seat-info-area .wagon-type{
+    height: 100%;
+    width: 63px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.seat-info-area .wagon::before {
+    content: "вагон";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.seat-info-area .seat::before {
+    content: "место";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.seat-info-area .wagon-type::before {
+    content: "тип";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.ticket .personal-info-area{
+    width: 633px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.personal-info-area .FIO,
+.personal-info-area .birth-date{
+    height: 100%;
+    min-width: 147px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.personal-info-area .FIO::before {
+    content: "пассажир";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.personal-info-area .birth-date::before {
+    content: "дата рождения";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.ticket .personal-ticket-info-area{
+    width: 698px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.personal-ticket-info-area .passport,
+.personal-ticket-info-area .ticket-number{
+    height: 100%;
+    min-width: 212px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.personal-ticket-info-area .passport::before {
+    content: "серия и номер паспорта";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
+
+.personal-ticket-info-area .ticket-number::before {
+    content: "электронный билет";
+    font-weight: 400;
+    font-size: 20px;
+    color: #4B4A4A;
+    display: block;
+}
