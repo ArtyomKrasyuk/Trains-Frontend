@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    height: 86px;
+}
+
+.header__content{
+    max-width: 1562px;
+    height: 86px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.header__img{
+    width: 60px;
+    height: 60px;
+}
+
+.header__img:hover{
+    cursor: pointer;
+}
+
+.header__title{
+    font-family: "Ubuntu", sans-serif;
+    color: #356286;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 25px;
+    margin-left: 61px;
+}
+
+main{
+    background-color: #EDF2FA;
+    padding-top: 55px;
+    padding-bottom: 72px;
+    min-height: 100vh;
+}
+
+.content{
+    max-width: 1342px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.main__title{
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    margin-bottom: 55px;
+}
+
+.append_train_btn{
+    width: 400px;
+    height: 90px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    color: #fff;
+    background-color: #356286;
+    border: 0px;
+    border-radius: 7px;
+    padding: 24px 0px;
+    margin-bottom: 80px;
+}
+
+.append_train_btn:hover{
+    cursor: pointer;
+}
+
+.trains{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 33px 49px;
+}
+
+.train{
+    width: 140px;
+    height: 155px;
+    background: url(../img/train.png) no-repeat center top;
+    background-size: cover;
+    padding-top: 20px;
+}
+
+.train:hover{
+    cursor: pointer;
+}
+
+.train__number{
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    letter-spacing: 0.03em;
+    color: #356286;
+    text-align: center;
+}

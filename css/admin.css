@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,500;1,500&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #edf2fa;  
+}
+
+.zagl {
+    background-color: #ffffff;
+    margin-bottom: 188px;
+    padding:30px 0px;
+}
+
+.txt1 {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    color: #356286;
+    letter-spacing: -1.44px;
+    line-height: 25px;
+    font-size: 36px;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.content{
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0px 5px;
+}
+
+.p {
+    width: 1053px;
+    font-family: "Roboto", Helvetica;
+    font-weight: 400;
+    font-style: italic;
+    color: #000000;
+    letter-spacing: 1.80px;
+    line-height: normal;
+    font-size: 36px;
+    margin-bottom: 90px;
+}
+
+.button-container {
+    width: 1127px;
+    height: 80px;
+}
+
+.button {
+    padding: 22px 17px 22px 160px;
+    background-color: white;
+    border: 1px solid #ddd;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    color: #356286;
+    font-size: 36px;
+    line-height: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    max-width: 1127px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 173px;
+}
+
+.button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

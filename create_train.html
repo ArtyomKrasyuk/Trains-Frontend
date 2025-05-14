@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/create_train.css">
+    <title>Создать поезд</title>
+</head>
+<body>
+    <header>
+        <div class="header__content">
+            <img src="img/return.png" alt="" class="header__img" onclick="window.location.href = 'admin_trains.html'">
+            <p class="header__title">Конструирование поезда</p>
+        </div>
+    </header>
+    <main>
+        <div class="content">
+            <p class="main__title">Создание нового поезда</p>
+            <p class="number__title">уникальный номер</p>
+            <input type="text" class="number__input" id="train_number"> 
+            <div class="carriage_number">
+                <p class="carriage_number__title">Номер вагона:</p>
+                <input type="text" class="carriage_number__input">
+            </div>
+            <div class="data_row">
+                <div class="carriage_type" id="carriage_type">
+                    <p class="type__title">тип вагона</p>
+                    <div class="type__item">
+                        <input id="platzkart" type="radio" name="type" class="type__radio" value="platzkart">
+                        <label for="platzkart" class="type__label">Плацкарт</label>
+                    </div>
+                    <div class="type__item">
+                        <input id="seat_carriage" type="radio" name="type" class="type__radio" value="seat_carriage">
+                        <label for="seat_carriage" class="type__label">Сидячий</label>
+                    </div>
+                    <div class="type__item">
+                        <input id="coupe" type="radio" name="type" class="type__radio" value="coupe">
+                        <label for="coupe" class="type__label">Купе</label>
+                    </div>
+                    <div class="type__item">
+                        <input id="sv" type="radio" name="type" class="type__radio" value="sv">
+                        <label for="sv" class="type__label">Спальный</label>
+                    </div>
+                </div>
+                <div class="data_div" id="coupe_data">
+                    <p class="number__title">кол-во купе</p>
+                    <input type="text" class="number__input" id="coupe_input">
+                </div>
+                <div class="data_div" id="row_data">
+                    <p class="number__title">кол-во блоков в ряду</p>
+                    <input type="text" class="number__input" id="row_input">
+                </div>
+                <div class="data_div" id="top_block_data">
+                    <p class="number__title">кол-во мест в верхнем блоке</p>
+                    <input type="text" class="number__input" id="top_block_input">
+                </div>
+                <div class="data_div" id="bottom_block_data">
+                    <p class="number__title">кол-во мест в нижнем блоке</p>
+                    <input type="text" class="number__input" id="bottom_block_input">
+                </div>
+            </div>
+            <div class="buttons_container">
+                <div class="append_carriage_btn" id="append_carriage">Добавить вагон</div>
+                <div class="create_btn" id="create">Создать поезд</div>
+            </div>
+            <div class="carriages">
+                <!--
+                <div class="carriage_container">
+                    <div class="delete_button">удалить вагон</div>
+                    <div class="carriage__schema">
+                        <div class="schema__top">
+                            <img src="img/WC.png" alt="" class="schema__wc_left">
+                            <img src="img/security_worker.png" alt="" class="schema__security_worker">
+                            <div class="schema__coupe_row" id="coupe_seats">
+                                <div class="coupe__wrapper">
+                                    <div class="coupe last_coupe">
+                                        <div class="coupe__seats">
+                                            <div class="coupe__seat" data-tooltip="2134₽, верхнее">
+                                                <img src="img/strela_up.png" alt="" class="seat__img_top">
+                                                <p class="seat__number_top">2</p>
+                                            </div>
+                                            <div class="coupe__seat" data-tooltip="2134₽, верхнее">
+                                                <img src="img/strela_up.png" alt="" class="seat__img_top">
+                                                <p class="seat__number_top">4</p>
+                                            </div>
+                                            <div class="coupe__seat" data-tooltip="4234₽, нижнее">
+                                                <p class="seat__number_bottom">1</p>
+                                                <img src="img/strela_down.png" alt="" class="seat__img_bottom">
+                                            </div>
+                                            <div class="coupe__seat" data-tooltip="4234₽, нижнее">
+                                                <p class="seat__number_bottom">3</p>
+                                                <img src="img/strela_down.png" alt="" class="seat__img_bottom">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="coupe__type">Смешанное<br>купе</p>
+                                </div>
+                            </div>
+                            <img src="img/WC.png" alt="" class="schema__wc_right">
+                        </div>
+                        <div class="schema__bottom">
+                            <img src="img/coffee.png" alt="" class="schema__coffe">
+                            <img src="img/trash.png" alt="" class="schema__trash">
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                 <!--
+                <div class="carriage_container">
+                    <div class="delete_button">удалить вагон</div>
+                    <div class="carriage__schema">
+                        <div class="schema__top">
+                            <img src="img/WC.png" alt="" class="schema__wc_left">
+                            <img src="img/security_worker.png" alt="" class="schema__security_worker">
+                            <div class="schema__coupe_row" id="platzkart_seats">
+                                <div class="coupe__wrapper">
+                                    <div class="coupe last_coupe">
+                                        <div class="coupe__seats">
+                                            <div class="coupe__seat" data-tooltip="2134₽, верхнее">
+                                                <img src="img/strela_up.png" alt="" class="seat__img_top">
+                                                <p class="seat__number_top">2</p>
+                                            </div>
+                                            <div class="coupe__seat" data-tooltip="2134₽, верхнее">
+                                                <img src="img/strela_up.png" alt="" class="seat__img_top">
+                                                <p class="seat__number_top">4</p>
+                                            </div>
+                                            <div class="coupe__seat" data-tooltip="4234₽, нижнее">
+                                                <p class="seat__number_bottom">1</p>
+                                                <img src="img/strela_down.png" alt="" class="seat__img_bottom">
+                                            </div>
+                                            <div class="coupe__seat" data-tooltip="4234₽, нижнее">
+                                                <p class="seat__number_bottom">3</p>
+                                                <img src="img/strela_down.png" alt="" class="seat__img_bottom">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="img/WC.png" alt="" class="schema__wc_right">
+                        </div>
+                        <div class="schema__bottom_platzkart">
+                            <img src="img/coffee.png" alt="" class="schema__coffe">
+                            <div class="bottom__coupe_row" id="platzkart_bottom_seats">
+                                <div class="coupe__wrapper">
+                                    <div class="coupe_bottom last_coupe_bottom">
+                                        <div class="coupe__seats_bottom">
+                                            <div class="coupe__seat" data-tooltip="2134₽, нижнее">
+                                                <p class="seat__number_bottom">3</p>
+                                                <img src="img/strela_down.png" alt="" class="seat__img_bottom">
+                                            </div>
+                                            <div class="coupe__seat" data-tooltip="2134₽, верхнее">
+                                                <img src="img/strela_up.png" alt="" class="seat__img_top">
+                                                <p class="seat__number_top">2</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="img/trash.png" alt="" class="schema__trash">
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <!--
+                <div class="carriage_container">
+                    <div class="delete_button">удалить вагон</div>
+                    <div class="carriage__schema">
+                        <div class="schema__top">
+                            <img src="img/WC.png" alt="" class="schema__wc_left">
+                            <img src="img/security_worker.png" alt="" class="schema__security_worker">
+                            <div class="schema__coupe_row" id="sv_seats">
+                                <div class="coupe__wrapper">
+                                    <div class="coupe last_coupe">
+                                        <div class="coupe__seats">
+                                            <div class="coupe__seat" data-tooltip="2134₽">
+                                                <p class="seat__number_top">2</p>
+                                            </div>
+                                            <div class="coupe__seat" data-tooltip="2134₽">
+                                                <p class="seat__number_top">4</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="coupe__type">Смешанное<br>купе</p>
+                                </div>
+                            </div>
+                            <img src="img/WC.png" alt="" class="schema__wc_right">
+                        </div>
+                        <div class="schema__bottom">
+                            <img src="img/coffee.png" alt="" class="schema__coffe">
+                            <img src="img/trash.png" alt="" class="schema__trash">
+                        </div>
+                    </div>
+                </div>
+                -->
+
+                <!--
+                <div class="carriage_container">
+                    <div class="delete_button">удалить вагон</div>
+                    <div class="carriage__schema">
+                        <div class="seat_carriage__schema__top">
+                            <img src="img/WC.png" alt="" class="schema__wc_left">
+                            <img src="img/security_worker.png" alt="" class="schema__security_worker">
+                            <div class="schema__coupe_row seat_carriage_top_row" id="seat_carriage_seats">
+                                <div class="seat_block">
+                                    <div class="coupe__seat" data-tooltip="2134₽">
+                                        <p class="seat__number">2</p>
+                                    </div>
+                                    <div class="coupe__seat" data-tooltip="2134₽">
+                                        <p class="seat__number">3</p>
+                                    </div>
+                                    <div class="coupe__seat" data-tooltip="2134₽">
+                                        <p class="seat__number">4</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="img/WC.png" alt="" class="schema__wc_right">
+                        </div>
+                        <div class="schema__bottom">
+                            <img src="img/coffee.png" alt="" class="schema__coffe">
+                            <div class="seat_carriage_bottom_row" id="seat_carriage_bottom_seats">
+                                <div class="seat_block bottom_block">
+                                    <div class="coupe__seat" data-tooltip="2134₽">
+                                        <p class="seat__number">2</p>
+                                    </div>               
+                                </div>
+                            </div>
+                            <img src="img/trash.png" alt="" class="schema__trash">
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+    </main>
+    <script src="js/create_train.js"></script>
+</body>
+</html>
