@@ -58,6 +58,10 @@ h1 {
     margin-left: 135px;
 }
 
+.trips{
+    margin-bottom: 155px;
+}
+
 .trip{
     height: 158px;
     border: 0px;
@@ -121,6 +125,7 @@ h1 {
     background-color: #356286;
     position: relative;
     bottom: 11px;
+    text-decoration: none;
 }
 
 .top__btn:hover{
@@ -149,4 +154,236 @@ h1 {
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
+}
+
+.append_btn{
+    display: block;
+    font-family: "Roboto", sans-serif;
+    width: 400px;
+    height: 90px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 36px;
+    color: #fff;
+    padding: 24px 0px;
+    background-color: #356286;
+    border: 0px;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+.append_btn:hover{
+    cursor: pointer;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*
+
+/* Затемнение фона */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay:target {
+    display: flex;
+}
+
+/* Модальное окно */
+.modal {
+    background: #edf2fa;
+    padding: 40px;
+    border: 2px solid;
+    border-color: #000000;
+    width: 1290px;
+    height: 550px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1001;
+}
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.modal-header h2 {
+    font-family: "Roboto", Helvetica;
+    font-weight: 500;
+    color: #356286;
+    margin: 0;
+    font-size: 48px;
+}
+
+.close-icon {
+    font-size: 40px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal label {
+    font-family: "Roboto", Helvetica;
+    font-weight: 500;
+    color: #356286;
+    font-size: 32px;
+    line-height: 25px;
+    min-width: 120px;
+    margin-right: 10px;
+    text-align: right;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 33px;
+}
+
+.modal select,
+.modal input[type="text"] {
+    width: 450px;
+    padding: 8px 25px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.datetime-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.datetime-row label {
+    min-width: 110px;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon input[type="date"],
+.input-with-icon input[type="time"] {
+    width: 150px;
+    padding-left: 30px;
+    padding-right: 10px;
+    height: 35px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.icon {
+    position: absolute;
+    left: 8px;
+    color: #888;
+    pointer-events: none;
+}
+
+.cl-btn-7 {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    position: relative;
+    z-index: 1;
+    margin: 2px 10px auto auto;
+    cursor: pointer;
+}
+.cl-btn-7:before {
+    content: '+';
+    color: #337AB7;
+    position: absolute;
+    z-index: 2;
+    transform: rotate(45deg);
+    font-size: 50px;
+    line-height: 1;
+    top: -5px;
+    left: 6px;
+    transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);
+}
+.cl-btn-7:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background: #337AB7;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);
+    transform: scale(0.01);
+}
+.cl-btn-7:hover:after {
+    transform: scale(1);
+}
+.cl-btn-7:hover:before {
+    transform: scale(0.8) rotate(45deg);
+    color: #fff;
+}
+
+
+.button-right {
+    text-align: right;
+    margin-top: 60px;
+}
+
+.submit-btn {
+    background-color: #5495B2;
+    color: #356286;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #356286;
+    border-radius: 7px;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    color: #ffffff;
+    background-color: #356286;
+}
+
+.izm {
+    background: #edf2fa;
+    padding: 40px;
+    border: 2px solid;
+    border-color: #000000;
+    width: 1290px;
+    height: 550px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1001;
+}
+
+.izm label {
+    font-family: "Roboto", Helvetica;
+    font-weight: 500;
+    color: #356286;
+    font-size: 32px;
+    line-height: 25px;
+    min-width: 120px;
+    margin-right: 10px;
+    text-align: right;
+}
+
+.izm select,
+.izm input[type="text"] {
+    width: 450px;
+    padding: 8px 25px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }

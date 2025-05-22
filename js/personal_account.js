@@ -100,8 +100,10 @@ function enableInput(button) {
             }),
             credentials: 'include'
           });
-
-          if (response.status == 400) {
+          if(response.ok){
+            alert('Успешно');
+          }
+          else if (response.status == 400) {
             let body = await response.json();
             let message = body.violations[0].message;
             alert(message);

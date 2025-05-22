@@ -11,6 +11,24 @@ class Carriage{
     }
 }
 
+async function checkAuth(){
+    let url = 'http://127.0.0.1:8080/admin/test';
+    let response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        credentials: 'include'
+    });
+    if(response.ok) return true;
+    else return false;
+}
+
+async function checkAdmin(){
+    let check = await checkAuth();
+    if(!check) window.location.href = 'loginadmin.html';
+}
+
 let trainNumber = new URLSearchParams(window.location.search).get('trainNumber');
 
 let carriages = [];
@@ -21,32 +39,39 @@ if(trainNumber != 'new'){
     document.getElementById('train_number').value = trainNumber;
     fillArray();
 }
+else{
+    checkAdmin();
+}
 
 async function fillArray(){
-    let trainId = parseInt(document.getElementById('train_number').value);
-    let url = `http://127.0.0.1:8080/train/${trainId}`;
-    let response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        credentials: 'include'
-    });
-    if(response.ok){
-        let body = await response.json();
-        body.carriages.forEach(carriage=>{
-            let coupe = 0;
-            let row = 0;
-            if(carriage.type == 'Купе') coupe = carriage.numberOfSeats / 4;
-            else if(carriage.type == 'Плацкарт') coupe = carriage.numberOfSeats / 6;
-            else if(carriage.type == 'СВ') coupe = carriage.numberOfSeats / 2;
-            else row = carriage.numberOfSeats / (carriage.topBlockWidth + carriage.bottomBlockWidth);
-            let obj = new Carriage(carriage.number, carriage.type, coupe, row, carriage.topBlockWidth, carriage.bottomBlockWidth);
-            carriages.push(obj);
+    let check = await checkAuth();
+    if(!check) window.location.href = 'loginadmin.html';
+    else{
+        let trainId = parseInt(document.getElementById('train_number').value);
+        let url = `http://127.0.0.1:8080/train/${trainId}`;
+        let response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            credentials: 'include'
         });
-        getSeats();
+        if(response.ok){
+            let body = await response.json();
+            body.carriages.forEach(carriage=>{
+                let coupe = 0;
+                let row = 0;
+                if(carriage.type == 'Купе') coupe = carriage.numberOfSeats / 4;
+                else if(carriage.type == 'Плацкарт') coupe = carriage.numberOfSeats / 6;
+                else if(carriage.type == 'СВ') coupe = carriage.numberOfSeats / 2;
+                else row = carriage.numberOfSeats / (carriage.topBlockWidth + carriage.bottomBlockWidth);
+                let obj = new Carriage(carriage.number, carriage.type, coupe, row, carriage.topBlockWidth, carriage.bottomBlockWidth);
+                carriages.push(obj);
+            });
+            getSeats();
+        }
+        else alert('Не удалось загрузить поезд');
     }
-    else alert('Не удалось загрузить поезд');
 }
 
 let numberInput = document.querySelector('.carriage_number__input');
@@ -70,163 +95,167 @@ topBlockData.hidden = true;
 bottomBlockData.hidden = true;
 
 document.getElementById('create').onclick = async function(e){
-    let trainId = parseInt(document.getElementById('train_number').value);
-    if(trainId == 0) return;
-    let carriagesArray = [];
-    carriages.forEach(carriage =>{
-        if(carriage.type == 'Купе'){
-            let placesArray = [];
-            let numberOfSeats = carriage.coupe * 4;
-            for(let i = 1; i < numberOfSeats; i+=4){
-                let gender = 0;
-                if(i == 1) gender = 2;
-                else if(i == numberOfSeats - 3) gender = 1;
-                placesArray.push({
-                    'position': i,
-                    'comfortFactor': 1.5,
-                    'gender': gender,
-                });
-                placesArray.push({
-                    'position': i+1,
-                    'comfortFactor': 1.5,
-                    'gender': gender,
-                });
-                placesArray.push({
-                    'position': i+2,
-                    'comfortFactor': 1,
-                    'gender': gender,
-                });
-                placesArray.push({
-                    'position': i+3,
-                    'comfortFactor': 1,
-                    'gender': gender,
-                });
+    let check = await checkAuth();
+    if(!check) window.location.href = 'loginadmin.html';
+    else{
+        let trainId = parseInt(document.getElementById('train_number').value);
+        if(trainId == 0) return;
+        let carriagesArray = [];
+        carriages.forEach(carriage =>{
+            if(carriage.type == 'Купе'){
+                let placesArray = [];
+                let numberOfSeats = carriage.coupe * 4;
+                for(let i = 1; i < numberOfSeats; i+=4){
+                    let gender = 0;
+                    if(i == 1) gender = 2;
+                    else if(i == numberOfSeats - 3) gender = 1;
+                    placesArray.push({
+                        'position': i,
+                        'comfortFactor': 1.5,
+                        'gender': gender,
+                    });
+                    placesArray.push({
+                        'position': i+1,
+                        'comfortFactor': 1.5,
+                        'gender': gender,
+                    });
+                    placesArray.push({
+                        'position': i+2,
+                        'comfortFactor': 1,
+                        'gender': gender,
+                    });
+                    placesArray.push({
+                        'position': i+3,
+                        'comfortFactor': 1,
+                        'gender': gender,
+                    });
+                }
+                let carriageObj = {
+                    'number': carriage.number,
+                    'type': carriage.type,
+                    'numberOfSeats': numberOfSeats,
+                    'topBlockWidth': 0,
+                    'bottomBlockWidth': 0,
+                    'places': placesArray
+                }
+                carriagesArray.push(carriageObj);
             }
-            let carriageObj = {
-                'number': carriage.number,
-                'type': carriage.type,
-                'numberOfSeats': numberOfSeats,
-                'topBlockWidth': 0,
-                'bottomBlockWidth': 0,
-                'places': placesArray
+            else if(carriage.type == 'Плацкарт'){
+                let placesArray = [];
+                let numberOfSeats = carriage.coupe * 6;
+                for(let i = 1; i < numberOfSeats; i+=6){
+                    placesArray.push({
+                        'position': i,
+                        'comfortFactor': 1.5,
+                        'gender': 0,
+                    });
+                    placesArray.push({
+                        'position': i+1,
+                        'comfortFactor': 1.5,
+                        'gender': 0,
+                    });
+                    placesArray.push({
+                        'position': i+2,
+                        'comfortFactor': 1,
+                        'gender': 0,
+                    });
+                    placesArray.push({
+                        'position': i+3,
+                        'comfortFactor': 1,
+                        'gender': 0,
+                    });
+                    placesArray.push({
+                        'position': i+4,
+                        'comfortFactor': 1,
+                        'gender': 0,
+                    });
+                    placesArray.push({
+                        'position': i+5,
+                        'comfortFactor': 1.5,
+                        'gender': 0,
+                    });
+                }
+                let carriageObj = {
+                    'number': carriage.number,
+                    'type': carriage.type,
+                    'numberOfSeats': numberOfSeats,
+                    'topBlockWidth': 0,
+                    'bottomBlockWidth': 0,
+                    'places': placesArray
+                }
+                carriagesArray.push(carriageObj);
             }
-            carriagesArray.push(carriageObj);
+            else if(carriage.type == 'СВ'){
+                let placesArray = [];
+                let numberOfSeats = carriage.coupe * 2;
+                for(let i = 1; i < numberOfSeats; i+=2){
+                    let gender = 0;
+                    if(i == 1) gender = 2;
+                    else if(i == numberOfSeats - 1) gender = 1;
+                    placesArray.push({
+                        'position': i,
+                        'comfortFactor': 1,
+                        'gender': gender,
+                    });
+                    placesArray.push({
+                        'position': i+1,
+                        'comfortFactor': 1,
+                        'gender': gender,
+                    });
+                }
+                let carriageObj = {
+                    'number': carriage.number,
+                    'type': carriage.type,
+                    'numberOfSeats': numberOfSeats,
+                    'topBlockWidth': 0,
+                    'bottomBlockWidth': 0,
+                    'places': placesArray
+                }
+                carriagesArray.push(carriageObj);
+            }
+            else{
+                let placesArray = [];
+                let numberOfSeats = (carriage.topBlock + carriage.bottomBlock) * carriage.row;
+                for(let i = 1; i < numberOfSeats; i+=1){
+                    placesArray.push({
+                        'position': i,
+                        'comfortFactor': 1,
+                        'gender': 0,
+                    });
+                }
+                let carriageObj = {
+                    'number': carriage.number,
+                    'type': carriage.type,
+                    'numberOfSeats': numberOfSeats,
+                    'topBlockWidth': carriage.topBlock,
+                    'bottomBlockWidth': carriage.bottomBlock,
+                    'places': placesArray
+                }
+                carriagesArray.push(carriageObj);
+            }
+        });
+        let trainObj = {
+            'trainId': trainId,
+            'trainName': 'Поезд',
+            'carriages': carriagesArray
         }
-        else if(carriage.type == 'Плацкарт'){
-            let placesArray = [];
-            let numberOfSeats = carriage.coupe * 6;
-            for(let i = 1; i < numberOfSeats; i+=6){
-                placesArray.push({
-                    'position': i,
-                    'comfortFactor': 1.5,
-                    'gender': 0,
-                });
-                placesArray.push({
-                    'position': i+1,
-                    'comfortFactor': 1.5,
-                    'gender': 0,
-                });
-                placesArray.push({
-                    'position': i+2,
-                    'comfortFactor': 1,
-                    'gender': 0,
-                });
-                placesArray.push({
-                    'position': i+3,
-                    'comfortFactor': 1,
-                    'gender': 0,
-                });
-                placesArray.push({
-                    'position': i+4,
-                    'comfortFactor': 1,
-                    'gender': 0,
-                });
-                placesArray.push({
-                    'position': i+5,
-                    'comfortFactor': 1.5,
-                    'gender': 0,
-                });
-            }
-            let carriageObj = {
-                'number': carriage.number,
-                'type': carriage.type,
-                'numberOfSeats': numberOfSeats,
-                'topBlockWidth': 0,
-                'bottomBlockWidth': 0,
-                'places': placesArray
-            }
-            carriagesArray.push(carriageObj);
+        let url = 'http://127.0.0.1:8080/admin/add-train';
+        let method = 'POST';
+        if(trainNumber != 'new') {
+            url = 'http://127.0.0.1:8080/admin/change-train';
+            method = 'PATCH';
         }
-        else if(carriage.type == 'СВ'){
-            let placesArray = [];
-            let numberOfSeats = carriage.coupe * 2;
-            for(let i = 1; i < numberOfSeats; i+=2){
-                let gender = 0;
-                if(i == 1) gender = 2;
-                else if(i == numberOfSeats - 1) gender = 1;
-                placesArray.push({
-                    'position': i,
-                    'comfortFactor': 1,
-                    'gender': gender,
-                });
-                placesArray.push({
-                    'position': i+1,
-                    'comfortFactor': 1,
-                    'gender': gender,
-                });
-            }
-            let carriageObj = {
-                'number': carriage.number,
-                'type': carriage.type,
-                'numberOfSeats': numberOfSeats,
-                'topBlockWidth': 0,
-                'bottomBlockWidth': 0,
-                'places': placesArray
-            }
-            carriagesArray.push(carriageObj);
-        }
-        else{
-            let placesArray = [];
-            let numberOfSeats = (carriage.topBlock + carriage.bottomBlock) * carriage.row;
-            for(let i = 1; i < numberOfSeats; i+=1){
-                placesArray.push({
-                    'position': i,
-                    'comfortFactor': 1,
-                    'gender': 0,
-                });
-            }
-            let carriageObj = {
-                'number': carriage.number,
-                'type': carriage.type,
-                'numberOfSeats': numberOfSeats,
-                'topBlockWidth': carriage.topBlock,
-                'bottomBlockWidth': carriage.bottomBlock,
-                'places': placesArray
-            }
-            carriagesArray.push(carriageObj);
-        }
-    });
-    let trainObj = {
-        'trainId': trainId,
-        'trainName': 'Поезд',
-        'carriages': carriagesArray
+        let response = await fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(trainObj),
+            credentials: 'include'
+        });
+        if(response.ok) window.location.href = 'admin_trains.html';
+        else alert('Ошибка');
     }
-    let url = 'http://127.0.0.1:8080/add-train';
-    let method = 'POST';
-    if(trainNumber != 'new') {
-        url = 'http://127.0.0.1:8080/change-train';
-        method = 'PATCH';
-    }
-    let response = await fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(trainObj),
-        credentials: 'include'
-    });
-    if(response.ok) window.location.href = 'admin_trains.html';
-    else alert('Ошибка');
 }
 
 const radioButtons = document.querySelectorAll('input[name="type"]');

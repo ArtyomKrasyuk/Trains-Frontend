@@ -77,6 +77,8 @@ async function setData(){
     }
 }
 
+const { jsPDF } = window.jspdf;
+
 setData();
 
 function setButtons(){
@@ -94,6 +96,200 @@ function setButtons(){
       });
       if(response.ok) setData();
       else alert('Произошла ошибка при отмене');
+    }
+  });
+
+    let downloadButtons = document.querySelectorAll('.download-button');
+  downloadButtons.forEach(button => {
+    button.onclick = function(e) {
+      const ticketEl = e.currentTarget.parentElement;
+      const ticketNumber = ticketEl.id;
+      const cities = ticketEl.querySelector('.cities').innerText;
+      const [cityFrom, cityTo] = cities.split(' - ');
+      const train = ticketEl.querySelector('.name').innerText;
+      const trainClean = train.replace(/^Поезд\s+/i, '');
+      const fio = ticketEl.querySelector('.FIO').innerText;
+      const birth = ticketEl.querySelector('.birth-date').innerText;
+      const passport = ticketEl.querySelector('.passport').innerText;
+      const wagon = ticketEl.querySelector('.wagon').innerText;
+      const seat = ticketEl.querySelector('.seat').innerText;
+      const wagonType = ticketEl.querySelector('.wagon-type').innerText;
+      const departureDate = ticketEl.querySelector('.departure-time-area .date').innerText;
+      const departureTime = ticketEl.querySelector('.departure-time-area .time').innerText;
+      const arrivalDate = ticketEl.querySelector('.arrival-time-area .date').innerText;
+      const arrivalTime = ticketEl.querySelector('.arrival-time-area .time').innerText;
+
+      const doc = new jsPDF({
+        orientation: 'landscape',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      doc.setFont('Roboto', 'normal');
+
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const marginLeft = 20;
+      let y = 10;
+
+      doc.setFillColor(0, 102, 204);
+      doc.rect(0, y, pageWidth, 25, 'F');
+
+      doc.setFontSize(60);
+      doc.setTextColor(255, 255, 255);
+      doc.text('ЭЛЕКТРОННЫЙ БИЛЕТ', pageWidth / 2, y + 20, { align: 'center' });
+
+      const centerX = pageWidth / 2;
+      const boxX = 20;
+      const boxY = 120;
+      const boxWidth = 45;
+      const boxHeight = 75;
+      const radius = 3;
+
+      doc.setDrawColor(0, 102, 204);
+      doc.setFillColor(255, 255, 255);
+      doc.setLineWidth(0.5);
+      doc.roundedRect(boxX, boxY, boxWidth, boxHeight, radius, radius, 'FD');
+
+      const paddingX = 5;
+      const paddingY = 10;
+
+      const leftColX = boxX + paddingX;
+      let blockTopY = boxY + paddingY;
+
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(14);
+      doc.text('Поезд', leftColX, blockTopY);
+      doc.setFontSize(40);
+      doc.text(trainClean, leftColX, blockTopY + 11.5);
+
+      doc.setFontSize(14);
+      doc.text('Вагон', leftColX, blockTopY + 20);
+      doc.setFontSize(40);
+      doc.text(wagon, leftColX, blockTopY + 31.5);
+      doc.setFontSize(14);
+      doc.text(wagonType, leftColX, blockTopY + 36);
+
+      doc.setFontSize(14);
+      doc.text('Место', leftColX, blockTopY + 47.5);
+      doc.setFontSize(40);
+      doc.text(seat, leftColX, blockTopY + 59);
+
+      const routeY = 49;
+      const routeHeight = 50;
+
+      const lineX = 60;
+      const lineY1 = routeY + 2;
+      const lineY2 = routeY + routeHeight - 2;
+
+      doc.setDrawColor(0, 102, 204);
+      doc.setFillColor(0, 102, 204);
+      doc.setLineWidth(0.5);
+
+      doc.line(lineX, lineY1, lineX, lineY2);
+
+      const circleRadius = 1.2;
+      doc.circle(lineX, lineY1, circleRadius, 'F');
+      doc.circle(lineX, lineY2, circleRadius, 'F');
+
+      doc.setTextColor(0, 0, 0);
+
+      doc.setFontSize(20);
+      doc.text(departureDate, lineX - 5, lineY1 + 5, { align: 'right' });
+      doc.setFontSize(35);
+      doc.text(departureTime, lineX - 5, lineY1 + 15, { align: 'right' });
+      doc.setFontSize(60);
+      doc.text(cityFrom, lineX + 4, lineY1 + 15);
+
+      doc.setFontSize(20);
+      doc.text(arrivalDate, lineX - 5, lineY2 - 10, { align: 'right' });
+      doc.setFontSize(35);
+      doc.text(arrivalTime, lineX - 5, lineY2, { align: 'right' });
+      doc.setFontSize(60);
+      doc.text(cityTo, lineX + 4, lineY2 );
+
+      const lineCenterY = (lineY1 + lineY2) / 2;
+      const horizLineThickness = 0.3;
+      doc.setDrawColor(150);
+      doc.setLineWidth(horizLineThickness);
+
+      doc.line(
+        lineX - 40,
+        lineCenterY,
+        lineX - 4,
+        lineCenterY
+      );
+
+      const width1 = doc.getTextWidth(cityFrom);
+      const width2 = doc.getTextWidth(cityTo);
+      const maxWidth = Math.max(width1, width2);
+
+      doc.line(
+        lineX + 4,
+        lineCenterY,
+        lineX + maxWidth + 10,
+        lineCenterY
+      );
+
+      const nameX = 75;
+      const nameY = boxY + 20;
+
+      doc.setFontSize(40);
+      const fioWidth = doc.getTextWidth(fio);
+      doc.text(fio, nameX, nameY );
+
+      doc.setFontSize(16);
+      doc.text(`ПАСПОРТ РФ ${passport}`, nameX + 1, nameY - 15);
+
+      const fioRightX = nameX + fioWidth;
+      const pageRightMargin = 200;
+      doc.text(birth, fioRightX - 1, nameY - 15, { align: 'right' });
+
+      const ticketY = 170;
+      const ticketX = 75;
+
+      doc.setFontSize(14);
+      doc.setTextColor(0, 0, 0);
+      doc.text(ticketNumber, ticketX, ticketY);
+
+      const canvas = document.createElement('canvas');
+
+      JsBarcode(canvas, ticketNumber, {
+        format: 'CODE128',
+        width: 2,
+        height: 50,
+        displayValue: false,
+      });
+
+      const barcodeImg = canvas.toDataURL('image/png');
+      const barcodeWidth = 200;
+      const barcodeHeight = 35;
+
+      const barcodeX = 75;
+      const barcodeY = 155;
+
+      doc.addImage(barcodeImg, 'PNG', barcodeX, barcodeY, barcodeWidth, barcodeHeight);
+
+      const chars = ticketNumber.split('');
+      const barcodeTextWidth = barcodeWidth;
+      const textFontSize = 16;
+
+      doc.setFontSize(textFontSize);
+
+      const totalTextWidth = chars.reduce((sum, char) => {
+        return sum + doc.getTextWidth(char);
+      }, 0);
+
+      const extraSpacing = (barcodeTextWidth - totalTextWidth - 26) / (chars.length - 1);
+
+      let currentX = barcodeX + 13;
+      const textY = barcodeY + barcodeHeight + 2;
+
+      for (const char of chars) {
+        doc.text(char, currentX, textY);
+        currentX += doc.getTextWidth(char) + extraSpacing;
+      }
+
+      doc.save(`ticket_${ticketNumber}.pdf`);
     }
   });
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +31,133 @@
             </div>
             -->
         </div> 
+        <a class="append_btn" href="#modal">Добавить рейс</a>
+
+        <!-- Затемнение + модальное окно -->
+    <div class="overlay" id="modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Добавить рейс</h2>
+                <a href="#" class="close-icon"><div class="cl-btn-7"></div></a>
+            </div>
+            
+            
+            <div class="form-row">
+                <label>номер поезда</label>
+                <select class="train_select" id="append_train">
+                    <option disabled selected>выберите поезд</option>
+                </select>
+            </div>
+    
+            <div class="form-row">
+                <label>город назначения</label>
+                <select class="city_select" id="append_city">
+                    <option disabled selected>выберите город</option>
+                </select>
+            </div>
+    
+            <div class="form-row datetime-row">
+                <label>дата отправления</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-calendar-alt icon"></i>
+                    <input type="date" id="append_departure_date">
+                </div>
+    
+                <label>время</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-clock icon"></i>
+                    <input type="time" id="append_departure_time">
+                </div>
+            </div> 
+            
+            <div class="form-row datetime-row">
+                <label>дата прибытия</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-calendar-alt icon"></i>
+                    <input type="date" id="append_arrival_date">
+                </div>
+    
+                <label>время</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-clock icon"></i>
+                    <input type="time" id="append_arrival_time">
+                </div>
+            </div> 
+
+            <div class="button-right">
+                <a href="#"><button class="submit-btn" id="append_submit">Добавить</button></a>
+            </div>
+    
+        </div>
+    </div>
+
+    <!-- Затемнение + модальное окно Изменить" -->
+    <div class="overlay" id="izm">
+        <div class="izm">
+            <div class="modal-header">
+                <h2>Изменить рейс</h2>
+                <a href="#" class="close-icon"><div class="cl-btn-7"></div></a>
+            </div>
+
+            <!--
+            <div class="form-row">
+                <label>
+                номер рейса
+                <input type="text" name="num" placeholder="от 1 до 200">
+               </label>
+            </div>
+            -->
+
+            <div class="form-row">
+                <label>номер поезда</label>
+                <select class="train_select" id="change_train">
+                    <option disabled selected>выберите поезд</option>
+                </select>
+            </div>
+    
+            <div class="form-row">
+                <label>город назначения</label>
+                <select class="city_select" id="change_city">
+                    <option disabled selected>выберите город</option>
+                </select>
+            </div>
+    
+            <div class="form-row datetime-row">
+                <label>дата отправления</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-calendar-alt icon"></i>
+                    <input type="date" id="change_departure_date">
+                </div>
+    
+                <label>время</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-clock icon"></i>
+                    <input type="time" id="change_departure_time">
+                </div>
+            </div>
+
+            <div class="form-row datetime-row">
+                <label>дата прибытия</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-calendar-alt icon"></i>
+                    <input type="date" id="change_arrival_date">
+                </div>
+    
+                <label>время</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-clock icon"></i>
+                    <input type="time" id="change_arrival_time">
+                </div>
+            </div> 
+
+            <div id="change__trip_id" style="display: none;"></div>
+
+            <div class="button-right">
+                <a href="#"><button class="submit-btn" id="change_submit">Изменить</button></a>
+        
+            </div>
+       </div>
+    </div>
     </div>
     <script src="js/admin_trips.js"></script>
 </body>
