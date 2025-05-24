@@ -55,15 +55,31 @@
             <p class="schedule__title">Расписание</p>
             <div class="schedule__filters">
                 <div class="schedule__filter">
+                    <!--
                     <p class="schedule_filter__title">Город</p>
+                    <img src="img/Vector 72.png" alt="" class="schedule_filter__img first_img">
+                    -->
+                    <select class="schedule_filter__title" id="change_city">
+                        <option disabled selected>Город</option>
+                        <option>Все</option>
+                    </select>
                     <img src="img/Vector 72.png" alt="" class="schedule_filter__img first_img">
                 </div>
                 <div class="schedule__filter">
+                    <!--
                     <p class="schedule_filter__title">Дата</p>
                     <img src="img/calendar 3.png" alt=""  class="schedule_filter__img second_img">
+                    <input type="text" class="schedule_filter__title" onfocus="this.type = 'date'; document.getElementById('calendar_icon').hidden = true;" placeholder="Дата">
+                    <img src="img/calendar 3.png" alt=""  class="schedule_filter__img second_img" id="calendar_icon">
+                    -->
+                    <div class="schedule_filter__title relative">
+                        <div id="date_label">Дата</div>
+                        <input type="date" style="opacity: 0;" id="change_date">
+                    </div>
+                    <img src="img/calendar 3.png" alt=""  class="schedule_filter__img second_img" id="calendar_icon">
                 </div>
                 <div class="schedule__filter">
-                    <p class="schedule_filter__title left">Есть свободные места</p>
+                    <p class="schedule_filter__title left" id="free_places">Есть свободные места</p>
                     <img src="img/Done.png" alt=""  class="schedule_filter__img third_img">
                 </div>
             </div>
