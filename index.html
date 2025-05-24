@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>Добро пожаловать</title>
 </head>
 <body>
@@ -74,7 +75,7 @@
                     -->
                     <div class="schedule_filter__title relative">
                         <div id="date_label">Дата</div>
-                        <input type="date" style="opacity: 0;" id="change_date">
+                        <input type="text" style="opacity: 0;" id="change_date">
                     </div>
                     <img src="img/calendar 3.png" alt=""  class="schedule_filter__img second_img" id="calendar_icon">
                 </div>
@@ -130,6 +131,12 @@
             <p class="footer__name">Петрова У.А.</p>
         </div>
     </footer>
+    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    -->
     <script src="js/index.js"></script>
 </body>
 </html>

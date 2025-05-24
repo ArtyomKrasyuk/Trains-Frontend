@@ -24,6 +24,7 @@ loginBtn.hidden = true;
 personalAccountBtn.hidden = true;
 
 let trips = {};
+let dates = [];
 
 changeCity.onchange = setTrips;
 changeDate.onchange = function(){
@@ -94,9 +95,15 @@ async function getTrips(){
                 trips[key] = arr;
             }
             else trips[key].push(tripObj);
+            dates.push(trip.departureTime.split(' ')[0]);
         });
     }
     else alert('Не удалось загрузить рейсы');
+    window.flatpickr('#change_date', {
+        'locale': 'ru',
+        enable: dates,
+        dateFormat: 'Y-m-d'
+    });
 }
 
 async function setData(){
@@ -200,13 +207,15 @@ function setTrips(){
             }
             else{
                 let strDates = '';
-
+                let hiddenDates = '';
                 for(let i = 0; i < valid.length; i++){
                     let departureDate = new Date(valid[i].departureTime);
+                    hiddenDates += valid[i].departureTime.split(' ')[0] + ' ';
                     strDates += `${departureDate.getDate()} ${months[departureDate.getMonth()]}, `;
                 }
 
                 strDates = strDates.slice(0, -2);
+                hiddenDates = hiddenDates.slice(0, -1);
 
                 let trip = valid[0];
     
@@ -219,7 +228,7 @@ function setTrips(){
                         //'<div class="top__btn">Выбрать дату</div>'+
                         `<div class="top__btn date">
                         Выбрать дату
-                        <input type="date" style="opacity: 0;" class="trip_date">
+                        <input type="text" style="opacity: 0;" class="trip_date">
                         </div>`+
                         `<div class="top__btn seats" style="display: none;">
                         Выбрать место
@@ -229,6 +238,7 @@ function setTrips(){
                         `<div class="bottom__number">${trip.trainId}</div>`+
                         `<p class="trip_id" style="display: none;"></p>`+
                         `<div class="bottom__dates">${strDates}</div>`+
+                        `<div class="hidden__dates" style="display: none">${hiddenDates}</div>`+
                     '</div>'+
                 '</div>';
                 
@@ -286,6 +296,12 @@ function setTrips(){
 
     let btns = document.querySelectorAll('.date');
     btns.forEach(btn=>{
+            window.flatpickr(btn.querySelector('.trip_date'), {
+            'locale': 'ru',
+            enable: getDates(btn),
+            dateFormat: 'Y-m-d'
+        });
+
         btn.querySelector('.trip_date').onchange = selectDate;
     });
 }
@@ -294,6 +310,11 @@ function clickPath(e){
     let elem = e.currentTarget;
     let tripId = elem.parentElement.parentElement.querySelector('.trip_id').innerHTML;
     window.location.href = `selection_of_seats.html?tripId=${tripId}`;
+}
+
+function getDates(elem){
+    let dates = elem.parentElement.parentElement.querySelector('.hidden__dates').innerHTML;
+    return dates.split(' ');
 }
 
 function selectDate(e){
