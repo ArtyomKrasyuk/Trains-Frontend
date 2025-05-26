@@ -76,7 +76,12 @@ header{
     width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;   
+    justify-content: center;
+    gap: 10px; 
+}
+
+#search_trips:hover{
+    cursor: pointer;
 }
 
 .big_filter{
@@ -106,6 +111,23 @@ header{
     border-radius: 7px;
 }
 
+.filter__input:disabled{
+    font-family: "Ubuntu", sans-serif;
+    color: #b9b9b9;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 15px 20px;
+    width: 100%;
+    border: 0px;
+    border-radius: 7px;
+    background-color: #fff;
+}
+
+.filter__select{
+    appearance: none;
+    color: #000;
+}
+
 .filter__input::placeholder{
     color: #b9b9b9;
 }
@@ -114,6 +136,7 @@ header{
     position: relative;
     left: 140px;
     bottom: 31.5px;
+    pointer-events: none    ;
 }
 
 .filter__img:hover{

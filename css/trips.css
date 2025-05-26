@@ -96,6 +96,13 @@ html, body {
   height: 49.81px;
   background-color: #FFFFFF;
   border-radius: 7px;
+  font-size: 12px;
+  color: #000;
+  line-height: 15px;
+  font-family: 'Ubuntu', sans-serif;
+  border: 0px;
+  appearance: none;
+  padding: 0px 10px;
 }
 
 .overlay-text {
@@ -126,9 +133,9 @@ html, body {
   width: 17px;
   position: absolute;
   object-fit: contain;
-  top: 50%;
   transform: translateY(-50%);
   right: 12px;
+  pointer-events: none;
 }
 
 .panel-button {
@@ -382,13 +389,16 @@ html, body {
   width: 227px;
   position: relative;
   background-color: #fff;
+  border: 0px;
   outline: 1px solid #356286;
   border-radius: 5px;
   cursor: pointer;
-  background-image: url("../img/vector.png");
   background-repeat: no-repeat;
   background-position: right 15px center;
   background-size: 13px auto;
+  appearance: none;
+  padding: 4px 18px;
+  font-size: 24px;
 }
 
 .availability-panel {

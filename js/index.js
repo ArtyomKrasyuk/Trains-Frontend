@@ -19,6 +19,9 @@ let personalAccountBtn = document.getElementById('pesonal_account');
 let freePlaces = document.getElementById('free_places');
 let changeCity = document.getElementById('change_city');
 let changeDate = document.getElementById('change_date');
+let headerSelect = document.getElementById('header__select');
+let headerDate = document.getElementById('header__date');
+let searchTrips = document.getElementById('search_trips');
 
 loginBtn.hidden = true;
 personalAccountBtn.hidden = true;
@@ -53,7 +56,8 @@ async function getCities(){
     if(response.ok){
         let body = await response.json();
         body.forEach(city=>{
-            changeCity.insertAdjacentHTML('beforeend', `<option>${city.cityName}</option>`)
+            changeCity.insertAdjacentHTML('beforeend', `<option>${city.cityName}</option>`);
+            headerSelect.insertAdjacentHTML('beforeend', `<option>${city.cityName}</option>`)
         });
     }
     else alert('Ошибка в получении списка городов');
@@ -104,6 +108,12 @@ async function getTrips(){
         enable: dates,
         dateFormat: 'Y-m-d'
     });
+    window.flatpickr('#header__date', {
+        'locale': 'ru',
+        enable: dates,
+        dateFormat: 'd.m.Y'
+    });
+    setHeaderInputs();
 }
 
 async function setData(){
@@ -352,4 +362,66 @@ function selectDate(e){
         }
     }
     if(!flag) alert('У этого рейса нет такой даты');
+}
+
+function setHeaderInputs(){
+    headerSelect.onchange = function(e){
+        if(headerDate.value == '' && headerSelect.value != 'Все'){
+            let newDates = [];
+            for(let key in trips){
+                for(let i = 0; i < trips[key].length; i++){
+                    if(trips[key][i].destination == headerSelect.value){
+                        newDates.push(trips[key][i].departureTime.split(' ')[0]);
+                    }
+                }
+            }
+            window.flatpickr('#header__date', {
+                'locale': 'ru',
+                enable: newDates,
+                dateFormat: 'd.m.Y'
+            });
+        }
+        else if(headerDate.value == '' && headerSelect.value == 'Все'){
+            window.flatpickr('#header__date', {
+                'locale': 'ru',
+                enable: dates,
+                dateFormat: 'd.m.Y'
+            }); 
+        }
+    }
+
+    headerDate.onchange = function(e){
+        if(headerSelect.value == 'Все' || headerSelect.value == 'Куда'){
+            let [day, month, year] = headerDate.value.split('.');
+            let date = `${year}-${month}-${day}`;
+            let newDestinations = [];
+            for(let key in trips){
+                for(let i = 0; i < trips[key].length; i++){
+                    let departureTime = trips[key][i].departureTime.split(' ')[0];
+                    if(departureTime == date){
+                        newDestinations.push(trips[key][i].destination);
+                        break;
+                    }
+                }
+            }
+            if(headerSelect.value == 'Куда'){
+                headerSelect.innerHTML = '';
+                headerSelect.insertAdjacentHTML('beforeend', '<option selected disabled>Куда</option>');
+                headerSelect.insertAdjacentHTML('beforeend', '<option>Все</option>');
+            }
+            else{
+                headerSelect.innerHTML = '';
+                headerSelect.insertAdjacentHTML('beforeend', '<option disabled>Куда</option>');
+                headerSelect.insertAdjacentHTML('beforeend', '<option selected>Все</option>');
+            }
+            for(let i = 0; i < newDestinations.length; i++){
+                headerSelect.insertAdjacentHTML('beforeend', `<option>${newDestinations[i]}</option>`);
+            }
+        }
+    }
+
+    searchTrips.onclick = function(e){
+        if(headerSelect.value == 'Куда' || headerDate.value == '') alert('Необходимо заполнить город назначения и дату отправления');
+        else window.location.href = `trips.html?city=${headerSelect.value}&date=${headerDate.value}`;
+    }
 }

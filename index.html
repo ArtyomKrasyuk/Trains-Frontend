@@ -28,25 +28,33 @@
             <div class="tickets__filters">
                 <div class="tickets__filter big_filter">
                     <p class="filter__title">Откуда</p>
-                    <input type="text" class="filter__input" value="Самара">  
+                    <input type="text" class="filter__input" value="Самара" disabled> 
                 </div>
                 <div class="tickets__filter big_filter">
                     <p class="filter__title">Куда</p>
-                    <input type="text" class="filter__input" placeholder="Куда">  
+                    <!--
+                        <input type="text" class="filter__input" placeholder="Куда">  
+                    -->
+                    <select id="header__select" class="filter__input filter__select">
+                        <option selected disabled>Куда</option>
+                        <option>Все</option>
+                    </select>
                 </div>
                 <div class="tickets__filter small_filter">
                     <p class="filter__title">Туда</p>
-                    <input type="text" class="filter__input" placeholder="Дата туда"> 
+                    <input type="text" class="filter__input" placeholder="Дата туда" id="header__date"> 
                     <img src="img/calendar 2.png" alt="" class="filter__img">
                 </div>
+                <!--
                 <div class="tickets__filter small_filter">
                     <p class="filter__title">Обратно</p>
                     <input type="text" class="filter__input" placeholder="Дата обратно">
                     <img src="img/calendar 2.png" alt="" class="filter__img">
                 </div>
+                -->
             </div>
             <div class="tickets__title">
-                <p class="title__text">Подобрать билеты</p>
+                <p class="title__text" id="search_trips">Подобрать билеты</p>
                 <img src="img/Frame 68.png" alt="" class="title__img">
             </div>
         </div>
