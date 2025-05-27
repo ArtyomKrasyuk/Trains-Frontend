@@ -85,18 +85,66 @@ async function setButtons(){
         let check = await checkAuth();
         if(!check) window.location.href = 'loginadmin.html';
         else{
-            let train = parseInt(document.getElementById('append_train').value);
+            let train = document.getElementById('append_train').value;
             let city = document.getElementById('append_city').value;
             let departureDate = document.getElementById('append_departure_date').value;
             let departureTime = document.getElementById('append_departure_time').value;
             let arrivalDate = document.getElementById('append_arrival_date').value;
             let arrivalTime = document.getElementById('append_arrival_time').value;
+
+            if(train == 'выберите поезд'){
+                alert('Необходимо указать номер поезда');
+                return;
+            }
+            train = parseInt(train);
+            if(city == 'выберите город'){
+                alert('Необходимо указать город назначения');
+                return;
+            }
+            if(departureDate == ''){
+                alert('Необходимо указать дату отправления поезда');
+                return;
+            }
+            if(arrivalDate == ''){
+                alert('Необходимо указать дату прибытия поезда');
+                return;
+            }
+
+            if(departureTime == ''){
+                alert('Необходимо указать время отправления поезда');
+                return;
+            }
+            if(arrivalTime == ''){
+                alert('Необходимо указать время прибытия поезда');
+                return;
+            }
+
+            let departureStr = departureDate + ' ' + departureTime;
+            let arrivalStr = arrivalDate + ' ' + arrivalTime;
+
+            let departureObj = new Date(departureStr);
+            let arrivalObj = new Date(arrivalStr);
+
+            let now = new Date();
+
+            if(departureObj < now){
+                alert('Время отправления не может быть в прошлом');
+                return;
+            }
+            if(arrivalObj < now){
+                alert('Время прибытия не может быть в прошлом');
+                return;
+            }
+            if(arrivalObj < departureObj){
+                alert('Время прибытия не может быть раньше времени отправления');
+                return;
+            }
     
             let data = {
                 "tripId": 0,
                 "trainId": train,
                 "destination": city,
-                "departureTime": departureDate + ' ' + departureTime,
+                "departureTime": departureStr,
                 "arrivalTime": arrivalDate + ' ' + arrivalTime
             };
     
@@ -121,23 +169,69 @@ async function setButtons(){
         let check = await checkAuth();
         if(!check) window.location.href = 'loginadmin.html';
         else{
-            let train = parseInt(document.getElementById('change_train').value);
+            let train = document.getElementById('change_train').value;
             let city = document.getElementById('change_city').value;
             let departureDate = document.getElementById('change_departure_date').value;
             let departureTime = document.getElementById('change_departure_time').value;
             let arrivalDate = document.getElementById('change_arrival_date').value;
             let arrivalTime = document.getElementById('change_arrival_time').value;
             let tripId = parseInt(document.getElementById('change__trip_id').innerHTML);
+
+            if(train == 'выберите поезд'){
+                alert('Необходимо указать номер поезда');
+                return;
+            }
+            train = parseInt(train);
+            if(city == 'выберите город'){
+                alert('Необходимо указать город назначения');
+                return;
+            }
+            if(departureDate == ''){
+                alert('Необходимо указать дату отправления поезда');
+                return;
+            }
+            if(arrivalDate == ''){
+                alert('Необходимо указать дату прибытия поезда');
+                return;
+            }
+
+            if(departureTime == ''){
+                alert('Необходимо указать время отправления поезда');
+                return;
+            }
+            if(arrivalTime == ''){
+                alert('Необходимо указать время прибытия поезда');
+                return;
+            }
+
+            let departureStr = departureDate + ' ' + departureTime;
+            let arrivalStr = arrivalDate + ' ' + arrivalTime;
+
+            let departureObj = new Date(departureStr);
+            let arrivalObj = new Date(arrivalStr);
+
+            let now = new Date();
+
+            if(departureObj < now){
+                alert('Время отправления не может быть в прошлом');
+                return;
+            }
+            if(arrivalObj < now){
+                alert('Время прибытия не может быть в прошлом');
+                return;
+            }
+            if(arrivalObj < departureObj){
+                alert('Время прибытия не может быть раньше времени отправления');
+                return;
+            }
     
             let data = {
                 "tripId": tripId,
                 "trainId": train,
                 "destination": city,
-                "departureTime": departureDate + ' ' + departureTime,
-                "arrivalTime": arrivalDate + ' ' + arrivalTime
+                "departureTime": departureStr,
+                "arrivalTime": arrivalStr
             };
-    
-            console.log(data);
     
             let url = 'http://127.0.0.1:8080/admin/change-trip';
             let response = await fetch(url, {

@@ -11,6 +11,110 @@ class Carriage{
     }
 }
 
+document.getElementById('train_number').addEventListener('input', function(e){
+    this.value = this.value.replace(/\D/g, '');
+});
+
+document.querySelector('.carriage_number__input').addEventListener('input', function(e){
+    this.value = this.value.replace(/\D/g, '');
+});
+
+let inputs = document.querySelectorAll('.number__input');
+inputs.forEach(inp => {
+    inp.addEventListener('input', function(e){
+        this.value = this.value.replace(/\D/g, '');
+    });
+});
+
+function checkInputs(){
+    let coupe_input = document.getElementById('coupe_input');
+    let row_input = document.getElementById('row_input');
+    let top_block_input = document.getElementById('top_block_input');
+    let bottom_block_input = document.getElementById('bottom_block_input');
+
+    let platzkart = document.getElementById('platzkart');
+    let seat_carriage = document.getElementById('seat_carriage');
+    let coupe = document.getElementById('coupe');
+    let sv = document.getElementById('sv');
+
+    let num = document.querySelector('.carriage_number__input');
+
+
+    let flag = true;
+
+    if(coupe.checked){
+        if(coupe_input.value == ''){
+            alert('Колчество купе должно быть заполнено');
+            flag = false;
+        }
+        else{
+            let val = parseInt(coupe_input.value);
+            if(val < 3 || val > 9){
+                alert('Количество купе должно быть от 3 до 9');
+                flag = false;
+            }
+        }
+    }
+    else if(platzkart.checked){
+        if(coupe_input.value == ''){
+            alert('Колчество купе должно быть заполнено');
+            flag = false;
+        }
+        else{
+            let val = parseInt(coupe_input.value);
+            if(val < 9 || val > 10){
+                alert('Количество купе должно быть от 9 до 10');
+                flag = false;
+            }
+        }
+    }
+    else if(sv.checked){
+        if(coupe_input.value == ''){
+            alert('Колчество купе должно быть заполнено');
+            flag = false;
+        }
+        else{
+            let val = parseInt(coupe_input.value);
+            if(val < 8 || val > 10){
+                alert('Количество купе должно быть от 8 до 10');
+                flag = false;
+            }
+        }
+    }
+    else if(seat_carriage.checked){
+        if(row_input.value == '' || top_block_input.value == '' || bottom_block_input.value == ''){
+            alert('Все поля с характеристиками сидячего вагона должны быть заполнены');
+            flag = false;
+        }
+        else{
+            let row = parseInt(row_input.value);
+            let top = parseInt(top_block_input.value);
+            let bottom = parseInt(bottom_block_input.value);
+            if(row < 13 || row > 16){
+                alert('Количество блоков в ряду должно быть от 13 до 16');
+                flag = false;
+            }
+            if(top < 1 || top > 3 || bottom < 1 || bottom > 3){
+                alert('Количество мест в блоке должно быть от 1 до 3');
+                flag = false;
+            }
+        }
+    }
+
+    if(num.value == ''){
+        alert('Необходимо указать номер вагона');
+        flag = false;
+    }
+    else{
+        if(num.value < 1 || num.value > 20){
+            alert('Номер вагона может быть от 1 до 20');
+            flag = false;
+        }
+    }
+
+    return flag;
+}
+
 async function checkAuth(){
     let url = 'http://127.0.0.1:8080/admin/test';
     let response = await fetch(url, {
@@ -37,6 +141,7 @@ document.getElementById('create').hidden = true;
 
 if(trainNumber != 'new'){
     document.getElementById('train_number').value = trainNumber;
+    document.getElementById('train_number').disabled = true;
     fillArray();
 }
 else{
@@ -94,10 +199,53 @@ rowData.hidden = true;
 topBlockData.hidden = true;
 bottomBlockData.hidden = true;
 
+function checkTrain(){
+    let num = document.getElementById('train_number').value;
+    let flag = true;
+    if(num == ''){
+        alert('Необходимо указать номер поезда');
+        flag = false;
+    }
+    else{
+        let numInt = parseInt(num);
+        if(numInt < 1 || numInt > 96){
+            alert('Номер поезда может быть от 1 до 96');
+            flag = false;
+        }
+    }
+
+    if(carriages.length == 0){
+        alert('Поезд должен содержать вагоны');
+        flag = false;
+    }
+    else{
+        for(let i = 0; i < carriages.length; i++){
+            console.log(i);
+            console.log(carriages[i]);
+            if(i == 0){
+                if(carriages[0].number != 1){
+                    alert('Нумерация вагонов должна начинаться с 1');
+                    flag = false;
+                }
+            }
+            else{
+                if(carriages[i].number != carriages[i-1].number + 1){
+                    alert('Нумерация вагонов должна идти по порядку');
+                    flag = false;
+                }
+            }
+        }
+    }
+    return flag;
+}
+
 document.getElementById('create').onclick = async function(e){
     let check = await checkAuth();
     if(!check) window.location.href = 'loginadmin.html';
     else{
+        let res = checkTrain();
+        if(!res) return;
+
         let trainId = parseInt(document.getElementById('train_number').value);
         if(trainId == 0) return;
         let carriagesArray = [];
@@ -279,6 +427,9 @@ radioButtons.forEach(radio => {
 });
 
 document.getElementById('append_carriage').onclick = function(e){
+    let res = checkInputs();
+    if(!res) return;
+
     let number = parseInt(numberInput.value);
     let coupe = document.getElementById('coupe');
     let platzkart = document.getElementById('platzkart');
@@ -302,8 +453,33 @@ document.getElementById('append_carriage').onclick = function(e){
         type = 'СВ';
         obj = new Carriage(number, type, parseInt(coupeInput.value), parseInt(rowInput.value), parseInt(topBlockInput.value), parseInt(bottomBlockInput.value));
     }
+
+    /*
     if(carriages[number-1] != null && carriages[number-1].number == number) carriages.splice(number-1, 1);
     carriages.splice(number-1, 0, obj);
+    */
+    if(carriages.length == 0) carriages.push(obj);
+    else{
+        for(let i = 0; i < carriages.length; i++){
+            if(carriages[i].number > obj.number) {
+                carriages.splice(i, 0, obj);
+                break;
+            }
+            else if(carriages[i].number == obj.number){
+                carriages[i] = obj;
+                break;
+            }
+            else{
+                if(i == carriages.length - 1){
+                    carriages.push(obj);
+                    break;
+                }
+                else continue;
+            }
+        }
+    }
+
+
     getSeats();
     numberInput.value = number+1;
 }

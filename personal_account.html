@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/personal_account.css">
 </head>
 <body>
-  <div class="password_change_form">
+  <div class="password_change_form" hidden>
     <div class="form__top">
         <h1 class="title">Сменить пароль</h1>
         <img src="img/Close.png" alt="" id="close">
@@ -19,7 +19,7 @@
             <input type="password" class="form__input" id="current">
         </div>
         <div class="form__row">
-            <p class="desc">новый пароль пароль</p>
+            <p class="desc">новый пароль</p>
             <input type="password" class="form__input" id="new">
         </div>
         <div class="form__row last_row">
@@ -90,12 +90,13 @@
 
         <div class="information-point">
           <p class="information-label">пол</p>
-          <div class="information-panel">
-            <input class="input-box input-gender" value="Жен / Муж" disabled>
-            <button class="icon-button" data-target="input-gender">
-              <img src="img/edit-icon.png" alt="Icon" class="icon">
-            </button>
+            <div class="gender-area">
+            <div class="buttons">
+              <button class="male-button active" id="male">М</button>
+              <div class="female-button" id="female">Ж</div>
+            </div>
           </div>
+
         </div>
       </div>
       <div class="buttons-area">
@@ -112,6 +113,7 @@
       </div>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
   <script src="js/personal_account.js"></script>
 </body>
 </html>
