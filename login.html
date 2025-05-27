@@ -85,7 +85,7 @@
             top: 0;
             width: 900px;
             height: 100%;
-            /*background-image: url('elok.jpg');*/
+            background-image: url('img/elok.jpg');
             background-size: cover;
             transition: transform 1.2s ease-in-out;
         }
@@ -363,7 +363,15 @@
         async function signIn(e){
             let url = 'http://127.0.0.1:8080/login';
             let login = document.querySelector('.sign-in-email').value;
+            if(login.length < 15 || login.length > 254){
+                alert('Логин должен содержать от 15 до 254 символов');
+                return;
+            }
             let password = document.querySelector('.sign-in-password').value;
+            if(password.length < 8 || password.length > 15){
+                alert('Пароль должен содержать от 8 до 15 символов');
+                return;
+            }
             let info = {'login': login, 'password': password};
             let response = await fetch(url, {
                 method: 'POST',
@@ -374,10 +382,16 @@
                 credentials: 'include'
             });
             if(response.ok) {
-                console.log('ok');
                 window.location.href = 'index.html';
             }
-            else console.log(response.body());
+            else if(response.status == 400){
+                let body = await response.json();
+                alert(body.violations[0].message);
+            }
+            else {
+                alert('Неправильные данные');
+                document.querySelector('.sign-in-password').value = '';
+            }
         }
 
         async function signUp(e){
@@ -388,8 +402,40 @@
             let login = document.querySelector('.sign-up-email').value;
             let password = document.querySelector('.sign-up-password').value;
             let passwordRepeat = document.querySelector('.sign-up-password-repeat').value;
+            if(firstname.length < 2 || firstname.length > 20){
+                alert('Имя должно содержать от 2 до 20 символов');
+                return;
+            }
+            if(!/^[А-Яа-яЁё]+$/.test(firstname)){
+                alert('Имя должно содержать только буквы кириллицы');
+                return;
+            }
+            if(lastname.length < 1 || lastname.length > 45){
+                alert('Фамилия должна содержать от 1 до 45 символов');
+                return;
+            }
+            if(!/^[А-Яа-яЁё]+$/.test(lastname)){
+                alert('Фамилия должна содержать только буквы кириллицы');
+                return;
+            }
+            if(patronymic.length > 20){
+                alert('Отчество должно быть не больше 20 символов');
+                return;
+            }
+            if(!/^[А-Яа-яЁё]*$/.test(patronymic)){
+                alert('Отчество должно содержать только буквы кириллицы');
+                return;
+            }
+            if(login.length < 15 || login.length > 254){
+                alert('Логин должен содержать от 15 до 254 символов');
+                return;
+            }
+            if(password.length < 8 || password.length > 15){
+                alert('Пароль должен содержать от 8 до 15 символов');
+                return;
+            }
             if(password != passwordRepeat){
-                console.log('password mismatch');
+                alert('Повторение пароля должно совпадать с изначальным вариантом');
                 return;
             }
             let info = {'firstname': firstname, 'lastname': lastname, 'patronymic': patronymic, 'login': login, 'password': password};
@@ -402,10 +448,16 @@
                 credentials: 'include'
             });
             if(response.ok) {
-                console.log('ok');
                 window.location.href = 'index.html';
             }
-            else console.log(response.body());
+            else if(response.status == 400){
+                let body = await response.json();
+                alert(body.violations[0].message);
+            }
+            else {
+                alert('Неправильные данные');
+                document.querySelector('.sign-in-password').value = '';
+            }
         }
     </script>
 </body>

@@ -152,7 +152,13 @@
             if(response.ok) {
                 window.location.href = 'admin.html';
             }
-            else console.log(response.text());
+            else if(response.status == 400){
+                let body = await response.json();
+                alert(body.violations[0].message);
+            }
+            else {
+                alert('Неправильные данные');
+            }
         }
     </script>
 </body>
