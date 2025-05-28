@@ -364,7 +364,7 @@ document.getElementById('create').onclick = async function(e){
             else{
                 let placesArray = [];
                 let numberOfSeats = (carriage.topBlock + carriage.bottomBlock) * carriage.row;
-                for(let i = 1; i < numberOfSeats; i+=1){
+                for(let i = 1; i <= numberOfSeats; i+=1){
                     placesArray.push({
                         'position': i,
                         'comfortFactor': 1,
@@ -402,6 +402,10 @@ document.getElementById('create').onclick = async function(e){
             credentials: 'include'
         });
         if(response.ok) window.location.href = 'admin_trains.html';
+        else if(response.status == 500){
+            let text = await response.text();
+            alert(text);
+        }
         else alert('Ошибка');
     }
 }

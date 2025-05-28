@@ -67,6 +67,8 @@ setData();
 async function setButtons(){
     let trainBlocks = document.querySelectorAll('.train_select');
     trainBlocks.forEach(block => {
+        block.innerHTML = '';
+        block.insertAdjacentHTML('beforeend', '<option disabled selected>выберите поезд</option>');
         trainNumbers.forEach(train => {
             let str = `<option>${train}</option>`;
             block.insertAdjacentHTML('beforeend', str);
@@ -75,11 +77,18 @@ async function setButtons(){
 
     let cityBlocks = document.querySelectorAll('.city_select');
     cityBlocks.forEach(block => {
+        block.innerHTML = '';
+        block.insertAdjacentHTML('beforeend', '<option disabled selected>выберите город</option>');
         cities.forEach(city => {
             let str = `<option>${city}</option>`;
             block.insertAdjacentHTML('beforeend', str);
         });
     });
+
+    document.getElementById('append_departure_date').value = '';
+    document.getElementById('append_departure_time').value = '';
+    document.getElementById('append_arrival_date').value = '';
+    document.getElementById('append_arrival_time').value = '';
 
     document.getElementById('append_submit').onclick = async function(e){
         let check = await checkAuth();

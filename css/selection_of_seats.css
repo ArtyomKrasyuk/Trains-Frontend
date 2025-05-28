@@ -379,7 +379,7 @@ main{
 
 .seat_carriage_bottom_row{
     max-width: 844px;
-    height: 115x;
+    height: 115px;
     width: 100%;
     display: flex;
     justify-content: center;
