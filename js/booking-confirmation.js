@@ -70,8 +70,8 @@ function setData(data){
     if(clientData.gender == 2) gender == 'Ж';
 
     let str1 = '<div class="personal-data">'+
-        `<p class="lastname">${clientData.firstname}</p>`+
-        `<p class="firstname">${clientData.lastname}</p>`+
+        `<p class="lastname">${clientData.lastname}</p>`+
+        `<p class="firstname">${clientData.firstname}</p>`+
         `<p class="middlename">${clientData.patronymic}</p>`+
         `<p class="gender">${gender}</p>`+
         `<p class="birthdate">${clientData.birthday}</p>`+
