@@ -12,6 +12,7 @@ async function setData(){
         },
         credentials: 'include'
     });
+
     if(response.ok){
         let body = await response.json();
         let div = document.querySelector('.content-area');
@@ -21,7 +22,7 @@ async function setData(){
             let birthday = element.birthday.slice(8,10) + '.' + element.birthday.slice(5,7) + '.' + element.birthday.slice(0,4);
             let departureTime = element.departureTime.split(' ')[1].substring(0, 5);
             let arrivalTime = element.arrivalTime.split(' ')[1].substring(0, 5);
-    
+
             let departureDate = new Date(element.departureTime);
             let arrivalDate = new Date(element.arrivalTime);
             let now = new Date();
@@ -75,6 +76,7 @@ async function setData(){
         });
       setButtons();
     }
+
 }
 
 const { jsPDF } = window.jspdf;
@@ -233,9 +235,33 @@ function setButtons(){
       const nameX = 75;
       const nameY = boxY + 20;
 
-      doc.setFontSize(40);
-      const fioWidth = doc.getTextWidth(fio);
-      doc.text(fio, nameX, nameY );
+
+      let fontSize = 40;
+      doc.setFontSize(fontSize);
+      let fioWidth = doc.getTextWidth(fio);
+
+      const maxFioWidth = 200;
+      const minFontSize = 18;
+
+      while (fioWidth > maxFioWidth && fontSize > minFontSize) {
+        fontSize -= 2;
+        doc.setFontSize(fontSize);
+        fioWidth = doc.getTextWidth(fio);
+      }
+
+      let lines;
+      if (fioWidth > maxFioWidth) {
+        doc.setFontSize(minFontSize);
+        lines = doc.splitTextToSize(fio, maxFioWidth);
+      } else {
+        lines = [fio];
+      }
+
+      const fixedLineHeight = 6; // Заменить на нужное: 10–13
+      lines.forEach((line, i) => {
+        doc.text(line, nameX, nameY + i * fixedLineHeight);
+      });
+
 
       doc.setFontSize(16);
       doc.text(`ПАСПОРТ РФ ${passport}`, nameX + 1, nameY - 15);
