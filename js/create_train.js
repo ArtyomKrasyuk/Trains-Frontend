@@ -259,22 +259,22 @@ document.getElementById('create').onclick = async function(e){
                     else if(i == numberOfSeats - 3) gender = 1;
                     placesArray.push({
                         'position': i,
-                        'comfortFactor': 1.5,
+                        'comfortFactor': 1,
                         'gender': gender,
                     });
                     placesArray.push({
                         'position': i+1,
-                        'comfortFactor': 1.5,
+                        'comfortFactor': 1,
                         'gender': gender,
                     });
                     placesArray.push({
                         'position': i+2,
-                        'comfortFactor': 1,
+                        'comfortFactor': 1.5,
                         'gender': gender,
                     });
                     placesArray.push({
                         'position': i+3,
-                        'comfortFactor': 1,
+                        'comfortFactor': 1.5,
                         'gender': gender,
                     });
                 }
@@ -294,32 +294,32 @@ document.getElementById('create').onclick = async function(e){
                 for(let i = 1; i < numberOfSeats; i+=6){
                     placesArray.push({
                         'position': i,
-                        'comfortFactor': 1.5,
+                        'comfortFactor': 1,
                         'gender': 0,
                     });
                     placesArray.push({
                         'position': i+1,
-                        'comfortFactor': 1.5,
+                        'comfortFactor': 1,
                         'gender': 0,
                     });
                     placesArray.push({
                         'position': i+2,
-                        'comfortFactor': 1,
+                        'comfortFactor': 1.5,
                         'gender': 0,
                     });
                     placesArray.push({
                         'position': i+3,
-                        'comfortFactor': 1,
+                        'comfortFactor': 1.5,
                         'gender': 0,
                     });
                     placesArray.push({
                         'position': i+4,
-                        'comfortFactor': 1,
+                        'comfortFactor': 1.5,
                         'gender': 0,
                     });
                     placesArray.push({
                         'position': i+5,
-                        'comfortFactor': 1.5,
+                        'comfortFactor': 1,
                         'gender': 0,
                     });
                 }
