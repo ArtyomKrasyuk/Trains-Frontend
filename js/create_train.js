@@ -387,11 +387,15 @@ document.getElementById('create').onclick = async function(e){
             'trainName': 'Поезд',
             'carriages': carriagesArray
         }
-        let url = 'http://127.0.0.1:8080/admin/add-train';
+        let url = 'http://127.0.0.1:8080/admin/train';
         let method = 'POST';
         if(trainNumber != 'new') {
-            url = 'http://127.0.0.1:8080/admin/change-train';
+            url = `http://127.0.0.1:8080/admin/train/${trainId}`;
             method = 'PATCH';
+            trainObj = {
+            'trainName': 'Поезд',
+            'carriages': carriagesArray
+        }
         }
         let response = await fetch(url, {
             method: method,

@@ -45,7 +45,7 @@ document.querySelector('.confirm_btn').onclick = async function(e){
     alert('Повторение пароля не совпало с первым вариантом');
     return;
   }
-  let url = 'http://127.0.0.1:8080/client/change-password';
+  let url = 'http://127.0.0.1:8080/client/password';
   let response = await fetch(url, {
       method: 'PATCH',
       headers: {
@@ -186,7 +186,7 @@ function enableInput(button) {
         const path = getPath(inputField.classList);
         let newValue = inputField.value;
 
-        if (path === 'change-phone') {
+        if (path === 'phone') {
           const digits = newValue.replace(/\D/g, '');
           if (digits.length !== 11 || !newValue.startsWith('+7')) {
             alert('Введите корректный номер телефона в формате +7XXXXXXXXXX');
@@ -195,7 +195,7 @@ function enableInput(button) {
           }
         }
 
-        if (path === 'change-birthday') {
+        if (path === 'birthday') {
           const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
           if (!dateRegex.test(newValue)) {
             alert('Введите дату в формате дд.мм.гггг');
@@ -217,22 +217,22 @@ function enableInput(button) {
           }
         }
 
-        if (path === 'change-login' && !validateEmailFormat(newValue)) {
+        if (path === 'login' && !validateEmailFormat(newValue)) {
           alert("Введите корректный email (от 15 до 254 символов, формат name@domain.zone)");
           return;
         }
 
-        if (path === 'change-firstname' && !validateFirstname(newValue)) {
+        if (path === 'firstname' && !validateFirstname(newValue)) {
           alert("Имя должно содержать от 2 до 20 символов");
           return;
         }
 
-        if (path === 'change-lastname' && !validateLastname(newValue)) {
+        if (path === 'lastname' && !validateLastname(newValue)) {
           alert("Фамилия должна содержать от 1 до 45 символов");
           return;
         }
 
-        if (path === 'change-patronymic' && !validatePatronymic(newValue)) {
+        if (path === 'patronymic' && !validatePatronymic(newValue)) {
           alert("Отчество должно содержать до 20 символов");
           return;
         }
@@ -276,13 +276,13 @@ function enableInput(button) {
 
 // Функция для определения имени поля для отправки на сервер
 function getPath(classList) {
-  if (classList.contains('input-lastname')) return 'change-lastname';
-  if (classList.contains('input-firstname')) return 'change-firstname';
-  if (classList.contains('input-patronymic')) return 'change-patronymic';
-  if (classList.contains('input-mail')) return 'change-login';
-  if (classList.contains('input-birth-date')) return 'change-birthday';
-  if (classList.contains('input-phone-number')) return 'change-phone';
-  if (classList.contains('input-gender')) return 'change-gender';
+  if (classList.contains('input-lastname')) return 'lastname';
+  if (classList.contains('input-firstname')) return 'firstname';
+  if (classList.contains('input-patronymic')) return 'patronymic';
+  if (classList.contains('input-mail')) return 'login';
+  if (classList.contains('input-birth-date')) return 'birthday';
+  if (classList.contains('input-phone-number')) return 'phone';
+  if (classList.contains('input-gender')) return 'gender';
   return 'unknown';
 }
 
@@ -295,7 +295,7 @@ buttons.forEach(button => {
 });
 
 async function getClientData(){
-  let url = 'http://127.0.0.1:8080/client/get-data';
+  let url = 'http://127.0.0.1:8080/client/data';
   let response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -350,7 +350,7 @@ async function getClientData(){
 
 async function updateGenderOnServer(genderValue) {
   try {
-    const response = await fetch(`http://127.0.0.1:8080/client/change-gender`, {
+    const response = await fetch(`http://127.0.0.1:8080/client/gender`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

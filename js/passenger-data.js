@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function getClientData(){
-  let url = 'http://127.0.0.1:8080/client/get-data';
+  let url = 'http://127.0.0.1:8080/client/data';
   let response = await fetch(url, {
       method: 'GET',
       headers: {

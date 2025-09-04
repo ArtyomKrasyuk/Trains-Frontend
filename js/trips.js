@@ -35,7 +35,7 @@ document.getElementById('set').onclick = function(e){
 selectPlace.onchange = setTrips;
 
 async function getCities(){
-    let url = 'http://127.0.0.1:8080/get-cities';
+    let url = 'http://127.0.0.1:8080/cities';
     let response = await fetch(url, {
         method: 'GET',
         headers: {

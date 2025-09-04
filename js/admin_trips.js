@@ -17,7 +17,7 @@ async function checkAuth(){
 }
 
 async function getTrains(){
-    let url = 'http://127.0.0.1:8080/get-train-numbers';
+    let url = 'http://127.0.0.1:8080/train-numbers';
     let response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -35,7 +35,7 @@ async function getTrains(){
 }
 
 async function getCities(){
-    let url = 'http://127.0.0.1:8080/get-cities';
+    let url = 'http://127.0.0.1:8080/cities';
     let response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -150,14 +150,13 @@ async function setButtons(){
             }
     
             let data = {
-                "tripId": 0,
                 "trainId": train,
                 "destination": city,
                 "departureTime": departureStr,
                 "arrivalTime": arrivalDate + ' ' + arrivalTime
             };
     
-            let url = 'http://127.0.0.1:8080/admin/add-trip';
+            let url = 'http://127.0.0.1:8080/admin/trip';
             let response = await fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -235,14 +234,13 @@ async function setButtons(){
             }
     
             let data = {
-                "tripId": tripId,
                 "trainId": train,
                 "destination": city,
                 "departureTime": departureStr,
                 "arrivalTime": arrivalStr
             };
     
-            let url = 'http://127.0.0.1:8080/admin/change-trip';
+            let url = `http://127.0.0.1:8080/admin/trip/${tripId}`;
             let response = await fetch(url, {
                 method: 'PATCH',
                 body: JSON.stringify(data),

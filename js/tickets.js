@@ -88,7 +88,7 @@ function setButtons(){
   buttons.forEach(button=>{
     button.onclick = async function(e){
       let ticketNumber = e.currentTarget.parentElement.id;
-      let url = `http://127.0.0.1:8080/client/delete-ticket/${ticketNumber}`;
+      let url = `http://127.0.0.1:8080/client/ticket/${ticketNumber}`;
       let response = await fetch(url, {
         method: 'DELETE',
         headers: {

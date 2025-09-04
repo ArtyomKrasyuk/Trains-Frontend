@@ -25,7 +25,7 @@ async function getTrains(){
     let check = await checkAuth();
     if(!check) window.location.href = 'loginadmin.html';
     else{
-        let url = 'http://127.0.0.1:8080/get-train-numbers';
+        let url = 'http://127.0.0.1:8080/train-numbers';
         let response = await fetch(url, {
             method: 'GET',
             headers: {
